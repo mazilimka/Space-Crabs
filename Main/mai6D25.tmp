@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs2ja0bv6xsj2"]
+
+[ext_resource type="Script" path="res://Main/main.gd" id="1_q8mhu"]
+[ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="1_s3mb7"]
+[ext_resource type="PackedScene" uid="uid://c7vihjtxywe2u" path="res://Space/space_ship.tscn" id="2_glbos"]
+[ext_resource type="Script" path="res://Main/Arrow.gd" id="4_su6w6"]
+
+[sub_resource type="Curve" id="Curve_q305q"]
+_data = [Vector2(0, 0.857), 0.0, 0.143, 0, 1, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="GDScript" id="GDScript_7ghpx"]
+script/source = "extends Node2D
+
+@onready var coin := preload(\"res://Coin/Coin.tscn\")
+
+
+func _ready():
+	var hight := 5
+	var width := 5
+	#var coin_spawner := global_position
+	var offset_x := 40
+	var offset_y := 50
+	for y_pos in range(hight):
+		for x_pos in range(width):
+			var x_coin_inst : Node2D = coin.instantiate()
+			add_child(x_coin_inst, true)
+			x_coin_inst.owner = get_parent()
+			x_coin_inst.global_position = global_position + Vector2(offset_x * x_pos, offset_y * y_pos)
+		
+		
+"
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_q8mhu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 90.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 56
+text = "0"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8000.0
+offset_top = -8000.0
+offset_right = 8000.0
+offset_bottom = 8000.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_s3mb7")
+stretch_mode = 1
+
+[node name="SpaceShip" parent="." instance=ExtResource("2_glbos")]
+position = Vector2(342, 465)
+scale = Vector2(0.955, 0.955)
+
+[node name="Marker_for_muzzle" parent="SpaceShip/Muzzle" index="1"]
+scale = Vector2(-9262.36, -433.044)
+
+[node name="Arrow" type="Node2D" parent="SpaceShip"]
+position = Vector2(0.210968, 14.7679)
+scale = Vector2(0.21097, 0.21097)
+script = ExtResource("4_su6w6")
+
+[node name="Sprite2D" type="Line2D" parent="SpaceShip/Arrow"]
+modulate = Color(0.685733, 3.10443e-06, 5.77569e-07, 1)
+position = Vector2(3.28864, 0.363665)
+rotation = -1.5708
+scale = Vector2(0.33582, 0.658236)
+points = PackedVector2Array(2.61035, 1.0249, 2.60987, 68.8887, 32.1699, 53.8081, 2.60986, 68.8887, -26.9492, 53.8079)
+width = 7.0
+width_curve = SubResource("Curve_q305q")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 3.175
+
+[node name="Camera2D" type="Camera2D" parent="SpaceShip"]
+zoom = Vector2(2.54, 2.54)
+process_callback = 0
+limit_left = -8000
+limit_top = -8000
+limit_right = 8000
+limit_bottom = 8000
+editor_draw_limits = true
+
+[node name="CoinSpawner" type="Node2D" parent="."]
+position = Vector2(83, 61)
+script = SubResource("GDScript_7ghpx")
+
+[editable path="SpaceShip"]

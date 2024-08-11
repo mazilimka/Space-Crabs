@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs2ja0bv6xsj2"]
+
+[ext_resource type="Script" path="res://Main/main.gd" id="1_q8mhu"]
+[ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="1_s3mb7"]
+[ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://space_ship/space_ship.tscn" id="2_4g3ej"]
+[ext_resource type="Texture2D" uid="uid://b6refuas6qta1" path="res://Assets/perezagruzka_belaya_strelka_acoebknshiip_512.png" id="2_7okch"]
+[ext_resource type="Script" path="res://Main/Arrow.gd" id="4_bqu17"]
+
+[sub_resource type="Curve" id="Curve_fuwl6"]
+_data = [Vector2(0.696262, 0.417582), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_q8mhu")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="StartPosition" type="Button" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -113.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Start position"
+
+[node name="Score" type="Label" parent="HUD"]
+unique_name_in_owner = true
+offset_right = 90.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 56
+text = "0"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TeleportToCoin" type="Button" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -127.0
+offset_top = 44.0
+offset_bottom = 75.0
+grow_horizontal = 0
+text = "TeleportToCoin"
+
+[node name="Restart" type="TextureButton" parent="HUD"]
+light_mask = 0
+visibility_layer = 2
+offset_left = 25.0
+offset_top = 77.0
+offset_right = 65.0
+offset_bottom = 117.0
+texture_normal = ExtResource("2_7okch")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="HUD/Restart"]
+
+[node name="ColorRectForRestart" type="ColorRect" parent="HUD/Restart/CanvasLayer2"]
+visibility_layer = 2
+offset_left = 25.0
+offset_top = 76.0
+offset_right = 65.0
+offset_bottom = 118.0
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_s3mb7")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="SpaceShip" parent="." instance=ExtResource("2_4g3ej")]
+angular_damp = 2.0
+
+[node name="DistanceToCoin" type="Label" parent="SpaceShip"]
+unique_name_in_owner = true
+offset_top = 19.0
+offset_right = 40.0
+offset_bottom = 42.0
+
+[node name="Node2D" type="Node2D" parent="SpaceShip"]
+position = Vector2(0, 19)
+script = ExtResource("4_bqu17")
+
+[node name="Line2D2" type="Line2D" parent="SpaceShip/Node2D"]
+position = Vector2(-4.76837e-07, -1)
+scale = Vector2(7.28, 4.2)
+points = PackedVector2Array(0, 0, 3, 0, 2.07692, 0.666667, 3, 0, 2.06044, -0.714286)
+width = 1.0
+width_curve = SubResource("Curve_fuwl6")
+default_color = Color(0.679067, 0.0433004, 1.92523e-07, 1)
+joint_mode = 2
+begin_cap_mode = 1
+end_cap_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="SpaceShip"]
+process_callback = 0
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
+editor_draw_limits = true
+
+[node name="DistanceToStart" type="Label" parent="SpaceShip"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Start" type="Label" parent="."]
+modulate = Color(5.58317e-06, 0.864946, 0.648724, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -7.0
+offset_right = 17.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Start"
+
+[connection signal="pressed" from="HUD/StartPosition" to="." method="_on_start_position_pressed"]
+[connection signal="pressed" from="HUD/TeleportToCoin" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HUD/Restart" to="." method="_on_restart_pressed"]
+
+[editable path="SpaceShip"]

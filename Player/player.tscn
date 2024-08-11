@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddb3fhi2ytwwi"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_4rit2"]
+[ext_resource type="Texture2D" uid="uid://vahviuofypt5" path="res://Assets/space_ship.png" id="2_o8p60"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mf02t"]
+radius = 9.0
+height = 26.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(469, 250)
+scale = Vector2(5.075, 5.075)
+script = ExtResource("1_4rit2")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_o8p60")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_mf02t")

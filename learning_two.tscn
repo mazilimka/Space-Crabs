@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwlbuo3bktger"]
+
+[sub_resource type="GDScript" id="GDScript_p53lc"]
+script/source = "extends Node2D
+
+func _ready():
+	pass
+"
+
+[node name="learning_two" type="Node2D"]
+script = SubResource("GDScript_p53lc")

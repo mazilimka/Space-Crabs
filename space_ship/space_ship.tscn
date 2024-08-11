@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpt6t5dqkl8dy"]
+
+[ext_resource type="PackedScene" uid="uid://fjjhfqi7gqw7" path="res://Muzzle/muzzle.tscn" id="1_a41je"]
+[ext_resource type="Script" path="res://space_ship/space_ship.gd" id="1_u281d"]
+[ext_resource type="Texture2D" uid="uid://vahviuofypt5" path="res://Assets/space_ship.png" id="2_fsvlo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6ytg"]
+radius = 8.0
+height = 26.0
+
+[node name="SpaceShip" type="RigidBody2D"]
+z_index = 2
+collision_layer = 2
+collision_mask = 12
+mass = 0.25
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_u281d")
+
+[node name="Muzzle" parent="." instance=ExtResource("1_a41je")]
+position = Vector2(0, -19.0811)
+scale = Vector2(0.133333, 0.107159)
+
+[node name="Marker_for_muzzle" type="Marker2D" parent="Muzzle"]
+position = Vector2(187.5, 0.875267)
+scale = Vector2(45990.5, -5084.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fsvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_d6ytg")
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
