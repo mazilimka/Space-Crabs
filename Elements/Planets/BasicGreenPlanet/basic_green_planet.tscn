@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://ca5knjhiuaeiw"]
+
+[ext_resource type="Script" path="res://Elements/Planets/BasicGreenPlanet/basic_green_planet.gd" id="1_3g0nn"]
+[ext_resource type="Texture2D" uid="uid://brwb3jito2loa" path="res://Assets/Planets/green-planet-pixel-art-png.png" id="2_ixs64"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jkedn"]
+radius = 1536.02
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_034jo"]
+radius = 54.7375
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rmk6i"]
+radius = 92.5009
+
+[node name="BasicGreenPlanet" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+gravity_space_override = 3
+gravity_point = true
+gravity_point_unit_distance = 350.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 700.0
+script = ExtResource("1_3g0nn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jkedn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(10, 10)
+collision_layer = 32
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_034jo")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("2_ixs64")
+
+[node name="GravityZero" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
+collision_layer = 0
+collision_mask = 2
+gravity_space_override = 3
+gravity_point = true
+gravity_point_unit_distance = 10.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 20.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GravityZero"]
+shape = SubResource("CircleShape2D_rmk6i")

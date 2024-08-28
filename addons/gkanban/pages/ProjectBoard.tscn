@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://addons/gkanban/pages/ProjectBoard.gd" id="1"]
 [ext_resource type="FontFile" path="res://addons/gkanban/text_resources/font_header1.tres" id="2_en282"]
 [ext_resource type="StyleBox" path="res://addons/gkanban/text_resources/btn_project_board_hover.tres" id="3_eeqk6"]
-[ext_resource type="Texture2D" uid="uid://bseukjkaq2utl" path="res://addons/gkanban/assets/icons/png/delete-bin-6-line-white.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bseukjkaq2utl" path="res://Assets/assets/icons/png/delete-bin-6-line-white.png" id="6"]
 [ext_resource type="FontFile" path="res://addons/gkanban/text_resources/font_regular.tres" id="6_h4lmp"]
-[ext_resource type="Texture2D" uid="uid://bkaxisgfec2q3" path="res://addons/gkanban/assets/icons/png/arrow-left-s-line-white.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bkaxisgfec2q3" path="res://Assets/assets/icons/png/arrow-left-s-line-white.png" id="7"]
 [ext_resource type="StyleBox" path="res://addons/gkanban/text_resources/btn_outline_primary_sm.tres" id="7_l8buf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ii81g"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://fjjhfqi7gqw7"]
+
+[ext_resource type="Texture2D" uid="uid://p5b3v0rd5ev0" path="res://Assets/Paddle.png" id="1_bjhax"]
+[ext_resource type="Script" path="res://Elements/space_ship/Muzzle/muzzle.gd" id="2_ghg6d"]
+
+[node name="Muzzle" type="Node2D"]
+scale = Vector2(0.133333, 0.0714286)
+script = ExtResource("2_ghg6d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(60, 0)
+rotation = 1.5708
+scale = Vector2(2.44242, 1)
+texture = ExtResource("1_bjhax")

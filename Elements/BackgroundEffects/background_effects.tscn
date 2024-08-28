@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dibqg5auv3av6"]
+
+[ext_resource type="Script" path="res://Elements/BackgroundEffects/background_effects.gd" id="1_g3bnu"]
+
+[node name="AsteroidsGroup" type="Node2D"]
+z_index = 1
+script = ExtResource("1_g3bnu")

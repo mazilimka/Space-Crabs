@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlwnc2yeful23"]
+
+[ext_resource type="PackedScene" uid="uid://ca5knjhiuaeiw" path="res://Elements/Planets/BasicGreenPlanet/basic_green_planet.tscn" id="1_a42re"]
+[ext_resource type="Texture2D" uid="uid://3oyd10xgifxd" path="res://Assets/Planets/planet-earth-pixel-art-png.png" id="2_b21wl"]
+
+[node name="PlanetEarth" instance=ExtResource("1_a42re")]
+gravity_point_unit_distance = 600.0
+gravity = -300.0
+radius = 920.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+scale = Vector2(0.6, 0.6)
+
+[node name="StaticBody2D" parent="." index="1"]
+scale = Vector2(6, 6)
+
+[node name="Sprite2D" parent="StaticBody2D" index="1"]
+texture = ExtResource("2_b21wl")
+
+[node name="GravityZero" parent="." index="2"]
+scale = Vector2(1, 1)
+gravity_point = false
+gravity = 600.0

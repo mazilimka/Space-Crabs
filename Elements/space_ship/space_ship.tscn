@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpt6t5dqkl8dy"]
+
+[ext_resource type="PackedScene" uid="uid://fjjhfqi7gqw7" path="res://Elements/space_ship/Muzzle/muzzle.tscn" id="1_a41je"]
+[ext_resource type="Script" path="res://Elements/space_ship/space_ship.gd" id="1_u281d"]
+[ext_resource type="Texture2D" uid="uid://vahviuofypt5" path="res://Assets/Spaceships/space_ship.png" id="2_fsvlo"]
+[ext_resource type="PackedScene" uid="uid://cs0l2xueytl3w" path="res://Elements/space_ship/Arrow/arrow.tscn" id="4_t87pn"]
+[ext_resource type="PackedScene" uid="uid://3r3lreh28mmw" path="res://Elements/space_ship/SpaceShipUD/space_ship_hud.tscn" id="5_nqlav"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6ytg"]
+radius = 8.0
+height = 26.0
+
+[node name="SpaceShip" type="RigidBody2D" groups=["Player"]]
+z_index = 5
+collision_layer = 2
+collision_mask = 76
+mass = 0.25
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_u281d")
+
+[node name="Muzzle" parent="." instance=ExtResource("1_a41je")]
+position = Vector2(0, -3)
+scale = Vector2(0.133333, 0.107159)
+
+[node name="Marker_for_muzzle" type="Marker2D" parent="Muzzle"]
+position = Vector2(187.5, 0.875267)
+scale = Vector2(45990.5, -5084.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fsvlo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_d6ytg")
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="HPBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 20)
+offset_left = -34.0
+offset_top = -43.0
+offset_right = 38.67
+offset_bottom = -16.0
+theme_override_constants/outline_size = 0
+value = 100.0
+
+[node name="CameraTransform2D" type="RemoteTransform2D" parent="."]
+unique_name_in_owner = true
+update_rotation = false
+update_scale = false
+
+[node name="Arrow" parent="." instance=ExtResource("4_t87pn")]
+unique_name_in_owner = true
+
+[node name="SpaceShipHUD" parent="." instance=ExtResource("5_nqlav")]

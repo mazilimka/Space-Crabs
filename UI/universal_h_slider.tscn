@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtp0vkia8sk8v"]
+
+[ext_resource type="Script" path="res://UI/universal_h_slider.gd" id="1_w2sff"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+size_flags_horizontal = 10
+theme_override_constants/separation = 15
+script = ExtResource("1_w2sff")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HSlider" type="HSlider" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+value = 5.0
+
+[node name="SpinBox" type="SpinBox" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="value_changed" from="CenterContainer/HSlider" to="." method="_on_value_changed"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_value_changed"]

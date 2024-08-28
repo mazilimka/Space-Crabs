@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs0l2xueytl3w"]
+
+[ext_resource type="Script" path="res://Main/Arrow.gd" id="1_rh5s3"]
+
+[sub_resource type="Curve" id="Curve_msk7f"]
+_data = [Vector2(0.696262, 0.417582), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[node name="Arrow" type="Node2D"]
+position = Vector2(0, 19)
+script = ExtResource("1_rh5s3")
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2(-4.76837e-07, -1)
+scale = Vector2(7.28, 4.2)
+points = PackedVector2Array(0, 0, 3, 0, 2.07692, 0.666667, 3, 0, 2.06044, -0.714286)
+width = 1.0
+width_curve = SubResource("Curve_msk7f")
+default_color = Color(0.679067, 0.0433004, 1.92523e-07, 1)
+joint_mode = 2
+begin_cap_mode = 1
+end_cap_mode = 2

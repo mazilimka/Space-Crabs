@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxdwqhmy26w3c"]
+
+[ext_resource type="PackedScene" uid="uid://ca5knjhiuaeiw" path="res://Elements/Planets/BasicGreenPlanet/basic_green_planet.tscn" id="1_2ka25"]
+[ext_resource type="Texture2D" uid="uid://c5i58bkl2r581" path="res://Assets/Planets/orange-planet-pixel-art-png.png" id="2_b8n8b"]
+
+[node name="RedPlanet" instance=ExtResource("1_2ka25")]
+gravity_point_unit_distance = 400.0
+gravity = 1000.0
+radius = 2160.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+scale = Vector2(1.4, 1.4)
+
+[node name="StaticBody2D" parent="." index="1"]
+scale = Vector2(14, 14)
+
+[node name="Sprite2D" parent="StaticBody2D" index="1"]
+texture = ExtResource("2_b8n8b")
+
+[node name="GravityZero" parent="." index="2"]
+scale = Vector2(2.4, 2.4)

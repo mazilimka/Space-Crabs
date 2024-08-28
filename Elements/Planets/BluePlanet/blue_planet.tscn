@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://eqsxli5h2pby"]
+
+[ext_resource type="PackedScene" uid="uid://ca5knjhiuaeiw" path="res://Elements/Planets/BasicGreenPlanet/basic_green_planet.tscn" id="1_m0y1w"]
+[ext_resource type="Texture2D" uid="uid://dbqy3uiwchf7f" path="res://Assets/Planets/blue-planet-pixel-art-png.png" id="2_fqtrt"]
+
+[node name="BluePlanet" instance=ExtResource("1_m0y1w")]
+gravity_point_unit_distance = 400.0
+gravity = 620.0
+
+[node name="StaticBody2D" parent="." index="1"]
+scale = Vector2(8, 8)
+
+[node name="Sprite2D" parent="StaticBody2D" index="1"]
+texture = ExtResource("2_fqtrt")
+
+[node name="GravityZero" parent="." index="2"]
+scale = Vector2(1.335, 1.335)
+gravity_point_unit_distance = 30.0
+gravity = 30.0

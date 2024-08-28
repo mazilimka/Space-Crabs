@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7jbbmjiwp4uc"]
+
+[ext_resource type="Script" path="res://TestScenes/TESTMAIN/testmain.gd" id="1_yqh0q"]
+[ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="2_xf04m"]
+[ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="3_t3doi"]
+[ext_resource type="PackedScene" uid="uid://b5j887djsiwyi" path="res://Main/CursorVisibleOnControlPressed/cursor_visible_on_control_pressed.tscn" id="4_wlcs7"]
+[ext_resource type="PackedScene" uid="uid://bwkoh44m6b283" path="res://TestScenes/TEST_ENEMY/test_enemy.tscn" id="5_8dc2j"]
+[ext_resource type="PackedScene" uid="uid://ca5knjhiuaeiw" path="res://Elements/Planets/BasicGreenPlanet/basic_green_planet.tscn" id="5_ah20x"]
+[ext_resource type="PackedScene" uid="uid://d3jmq1auubc3j" path="res://Elements/Planets/BluePlanet/blue_planet.tscn" id="6_it52f"]
+[ext_resource type="PackedScene" uid="uid://bqd5thcsl6c8w" path="res://Elements/Planets/PlanetEarth/planet_earth.tscn" id="7_tdo0j"]
+[ext_resource type="PackedScene" uid="uid://cnfl5yl42ovn2" path="res://Elements/Planets/PlanetSaturn/planet_saturn.tscn" id="8_hy52x"]
+[ext_resource type="PackedScene" uid="uid://chgnmxy7i2lrg" path="res://Elements/Planets/RedPlanet/red_planet.tscn" id="9_mkdsa"]
+
+[node name="TESTMAIN" type="Node2D"]
+script = ExtResource("1_yqh0q")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10000.0
+offset_top = -10000.0
+offset_right = 10000.0
+offset_bottom = 10000.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xf04m")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="SpaceShip" parent="." instance=ExtResource("3_t3doi")]
+position = Vector2(5033, -3622)
+collision_mask = 4
+mass = 1.5
+angular_damp = 0.1
+
+[node name="Start" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(5.58317e-06, 0.864946, 0.648724, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1485.0
+offset_top = 713.0
+offset_right = 1555.0
+offset_bottom = 755.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 30
+text = "Start"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+ignore_rotation = false
+zoom = Vector2(1.3, 1.3)
+process_callback = 0
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
+position_smoothing_speed = 7.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="CursorVisibleOnControlPressed" parent="." instance=ExtResource("4_wlcs7")]
+
+[node name="Test Enemies" type="Node2D" parent="."]
+z_index = 1
+
+[node name="TestEnemy" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
+position = Vector2(-5591, 5502)
+
+[node name="TestEnemy2" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
+position = Vector2(-3152, 2200)
+
+[node name="TestEnemy3" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
+position = Vector2(353, -365)
+
+[node name="TestEnemy4" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
+position = Vector2(1902, -2676)
+
+[node name="TestEnemy5" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
+position = Vector2(3807, -4581)
+
+[node name="TestPlanets" type="Node2D" parent="."]
+
+[node name="GreenPlanet" parent="TestPlanets" instance=ExtResource("5_ah20x")]
+visible = false
+
+[node name="BluePlanet" parent="TestPlanets" instance=ExtResource("6_it52f")]
+position = Vector2(2086, -2326)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" parent="TestPlanets/BluePlanet" index="0"]
+scale = Vector2(0.85, 0.85)
+
+[node name="PlanetEarth" parent="TestPlanets" instance=ExtResource("7_tdo0j")]
+position = Vector2(4049, -4289)
+scale = Vector2(0.69, 0.69)
+metadata/_edit_group_ = true
+
+[node name="GravityZero" parent="TestPlanets/PlanetEarth" index="2"]
+gravity_point_unit_distance = 0.0
+gravity = -600.0
+
+[node name="PlanetSaturn" parent="TestPlanets" instance=ExtResource("8_hy52x")]
+position = Vector2(-2708, 2537)
+metadata/_edit_group_ = true
+
+[node name="GravityZero" parent="TestPlanets/PlanetSaturn" index="2"]
+gravity_point_unit_distance = 0.0
+
+[node name="RedPlanet" parent="TestPlanets" instance=ExtResource("9_mkdsa")]
+visible = false
+position = Vector2(-5749, 5945)
+gravity = 1000.0
+
+[node name="GravityZero" parent="TestPlanets/RedPlanet" index="2"]
+gravity_point = false
+gravity_point_unit_distance = 0.0
+gravity = 0.0
+
+[editable path="TestPlanets/GreenPlanet"]
+[editable path="TestPlanets/BluePlanet"]
+[editable path="TestPlanets/PlanetEarth"]
+[editable path="TestPlanets/PlanetSaturn"]
+[editable path="TestPlanets/RedPlanet"]

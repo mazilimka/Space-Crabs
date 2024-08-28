@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://addons/gkanban/components/ListMenu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dkeao5wdedf2q" path="res://addons/gkanban/components/CardButton.tscn" id="2"]
 [ext_resource type="FontFile" path="res://addons/gkanban/text_resources/font_bold.tres" id="2_oen8n"]
-[ext_resource type="Texture2D" uid="uid://bv1ixkoiig51m" path="res://addons/gkanban/assets/icons/png/close-line-white.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://bmi4uig3jtnwq" path="res://addons/gkanban/assets/icons/png/close-line.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bv1ixkoiig51m" path="res://Assets/assets/icons/png/close-line-white.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bmi4uig3jtnwq" path="res://Assets/assets/icons/png/close-line.png" id="4"]
 [ext_resource type="PackedScene" uid="uid://72yeam2dkgk3" path="res://addons/gkanban/components/MenuListButton.tscn" id="5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjp8h"]

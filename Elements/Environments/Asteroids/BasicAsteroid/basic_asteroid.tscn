@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://xteh4i8ds2vn"]
+
+[ext_resource type="Texture2D" uid="uid://bmm8f8pp5y38c" path="res://Assets/Environments/Asteroid 01 - Base.png" id="1_k31at"]
+
+[node name="BasicAsteroid" type="RigidBody2D"]
+z_index = 2
+collision_layer = 65
+collision_mask = 67
+mass = 90.0
+sleeping = true
+linear_damp = 0.2
+angular_damp = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(10, 10)
+texture = ExtResource("1_k31at")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(10, 10)
+polygon = PackedVector2Array(-9, -16, -11, -15, -13, -14, -14, -13, -15, -12, -16, -11, -17, -10, -18, -8, -19, -5, -19, 6, -18, 9, -13, 14, -11, 15, -9, 16, -6, 17, 6, 17, 9, 16, 11, 15, 16, 10, 17, 8, 18, 5, 19, 3, 19, 0, 18, -2, 17, -4, 13, -8, 11, -9, 9, -10, 7, -11, 3, -15, -1, -16)

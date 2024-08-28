@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5j887djsiwyi"]
+
+[ext_resource type="Script" path="res://Main/CursorVisibleOnControlPressed/cursor_visible_on_control_pressed.gd" id="1_k8440"]
+
+[node name="CursorVisibleOnControlPressed" type="Node2D"]
+script = ExtResource("1_k8440")

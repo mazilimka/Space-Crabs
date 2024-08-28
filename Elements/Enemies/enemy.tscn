@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://curmlty52e1nw"]
+
+[ext_resource type="Script" path="res://Elements/Enemies/enemy.gd" id="1_fvjhn"]
+[ext_resource type="Texture2D" uid="uid://dbrkdlg0ghvtc" path="res://Assets/godot-invader-small.png" id="2_r26es"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gifs"]
+atlas = ExtResource("2_r26es")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnbja"]
+atlas = ExtResource("2_r26es")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wxjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gifs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnbja")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dcuh1"]
+radius = 321.025
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 4
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 10
+slide_on_ceiling = false
+script = ExtResource("1_fvjhn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1vakt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4wxjh")
+autoplay = "default"
+frame_progress = 0.926814
+
+[node name="HPBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="HPBar"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_left = -6.0
+offset_top = -12.0
+offset_right = 94.0
+offset_bottom = 8.0
+scale = Vector2(0.125, 0.125)
+theme_override_font_sizes/font_size = 11
+value = 100.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_dcuh1")
+
+[node name="TimerBeforeShot" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.15
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

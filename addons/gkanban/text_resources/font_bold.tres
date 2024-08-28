@@ -1,6 +1,6 @@
-[gd_resource type="FontFile" load_steps=2 format=2]
+[gd_resource type="FontFile" load_steps=2 format=3]
 
-[ext_resource path="res://addons/gkanban/assets/fonts/nunito/Nunito-Bold.ttf" type="FontFile" id=1]
+[ext_resource type="FontFile" uid="uid://s4iw8xeeikyr" path="res://Assets/assets/fonts/nunito/Nunito-Bold.ttf" id="1"]
 
 [resource]
 font_data = ExtResource( 1 )
