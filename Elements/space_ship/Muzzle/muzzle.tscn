@@ -8,7 +8,21 @@ scale = Vector2(0.133333, 0.0714286)
 script = ExtResource("2_ghg6d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(60, 0)
+position = Vector2(232.053, 0.000622829)
 rotation = 1.5708
-scale = Vector2(2.44242, 1)
+scale = Vector2(2.44242, 3.45789)
+texture = ExtResource("1_bjhax")
+
+[node name="AimingPoint" type="Node2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="AimingPoint"]
+position = Vector2(2000, 0)
+scale = Vector2(0.42203, 1)
+texture = ExtResource("1_bjhax")
+
+[node name="Sprite2D2" type="Sprite2D" parent="AimingPoint"]
+position = Vector2(2000, 0)
+rotation = 1.5708
+scale = Vector2(0.629188, 0.69883)
 texture = ExtResource("1_bjhax")

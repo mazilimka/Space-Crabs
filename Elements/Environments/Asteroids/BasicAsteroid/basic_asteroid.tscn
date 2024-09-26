@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://xteh4i8ds2vn"]
+[gd_scene load_steps=3 format=3 uid="uid://xteh4i8ds2vn"]
 
+[ext_resource type="Script" path="res://Elements/Environments/Asteroids/BasicAsteroid/basic_asteroid.gd" id="1_cequ2"]
 [ext_resource type="Texture2D" uid="uid://bmm8f8pp5y38c" path="res://Assets/Environments/Asteroid 01 - Base.png" id="1_k31at"]
 
 [node name="BasicAsteroid" type="RigidBody2D"]
 z_index = 2
-collision_layer = 65
-collision_mask = 67
+collision_layer = 64
+collision_mask = 66
 mass = 90.0
 sleeping = true
 linear_damp = 0.2
 angular_damp = 10.0
+script = ExtResource("1_cequ2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(10, 10)

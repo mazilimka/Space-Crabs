@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs2ja0bv6xsj2"]
+[gd_scene load_steps=5 format=3 uid="uid://cs2ja0bv6xsj2"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_eoanu"]
 [ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="1_s3mb7"]
 [ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="2_4g3ej"]
-[ext_resource type="PackedScene" uid="uid://b5j887djsiwyi" path="res://Main/CursorVisibleOnControlPressed/cursor_visible_on_control_pressed.tscn" id="4_frabo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx5xs"]
 size = Vector2(30, 40)
@@ -22,14 +21,19 @@ offset_right = 10000.0
 offset_bottom = 10000.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_s3mb7")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="SpaceShip" parent="." instance=ExtResource("2_4g3ej")]
-position = Vector2(357, 4696)
+unique_name_in_owner = true
 mass = 2.0
 angular_damp = 0.1
+
+[node name="Marker2D" type="Marker2D" parent="SpaceShip"]
+unique_name_in_owner = true
+position = Vector2(0, 400)
 
 [node name="Start" type="Label" parent="."]
 unique_name_in_owner = true
@@ -50,7 +54,6 @@ text = "Start"
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
 ignore_rotation = false
-zoom = Vector2(1.3, 1.3)
 process_callback = 0
 limit_left = -10000
 limit_top = -10000
@@ -59,8 +62,6 @@ limit_bottom = 10000
 position_smoothing_speed = 7.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
-
-[node name="CursorVisibleOnControlPressed" parent="." instance=ExtResource("4_frabo")]
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -106,4 +107,10 @@ shape = SubResource("RectangleShape2D_bx5xs")
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 3.0
+autostart = true
+
+[node name="TimerForGarbage" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 6.0
 autostart = true

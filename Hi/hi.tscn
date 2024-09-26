@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtiecp2k2wryb"]
+
+[ext_resource type="FontFile" uid="uid://b0bqpr02ij4gl" path="res://Assets/PixelOperator8.ttf" id="1_c1183"]
+[ext_resource type="Script" path="res://Hi/hi.gd" id="1_jk5cl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d4r8r"]
+font = ExtResource("1_c1183")
+font_size = 28
+outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_ggw4h"]
+font_size = 17
+
+[node name="Hi" type="Panel"]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 8.0
+offset_right = -102.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_jk5cl")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = 7.0
+offset_right = 56.0
+offset_bottom = 46.0
+grow_horizontal = 2
+text = "Привет!"
+label_settings = SubResource("LabelSettings_d4r8r")
+clip_text = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Label2" type="Label" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 1
+text = "Не хочу хвастаться, но и молчать тоже не могу, т.к. тогда пропадёт мотивация вообще заниматся разработкой игр (именно поэтому я постоянно скидываю тебе версии).
+Вобщем, я добавил:
+	- Управление с геймпада (играть на нём не возможно, поэтому в будущем хочу добавить очивку за прохождение игры с геймпадом)
+	- Возможность включить цвет точки прицеливания в настройках, чтобы легче было целиться с геймпада
+	- Возможность менять цвет точки прицеливания в самой игре (я ох***, когда узнал, что такое есть в Godot)
+	- Вибрацию геймпада при получении урона (будет жалко, если у тебя не вибрирует геймпад)
+
+Из настроек пока всё, далее:
+	- Добавил кометы
+	- Добавил астероиды (из-за них игра может чуть дольше загружаться)
+	- Изменил гравитацию планетам (теперь она более интересная и реалистичная)
+	- Добавил космический мусор. Его должно быть очень много, поэтому в целях оптимизиции я переиспользую его. Из-за этого, он 			   может исчезнуть у тебя перед носом.
+	- Добавил визуализацию получения и нанесения урона
+
+Хочу поделиться с тобой мотивацией для разработки!
+Если у тебя вдруг возникнут идеи по поводу разнообразия врагов, то я буду рад услышать
+Когда выйдешь отсюда, игра будет загружаться, ОНА НЕ ЗАВИСЛА! (Просто, я пока не умею делать экран загрузки)"
+label_settings = SubResource("LabelSettings_ggw4h")
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 0.0976563, 0.994959, 1)
+layout_mode = 0
+offset_left = 811.0
+offset_top = 470.0
+offset_right = 940.0
+offset_bottom = 520.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_c1183")
+theme_override_font_sizes/font_size = 29
+text = "Close"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -38,7 +38,7 @@ height = 14.0
 
 [node name="Rocked" type="Area2D"]
 collision_layer = 16
-collision_mask = 10
+collision_mask = 74
 script = ExtResource("1_qar5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -49,6 +49,7 @@ autoplay = "Rocked"
 frame_progress = 0.543976
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_s5bxc")
 

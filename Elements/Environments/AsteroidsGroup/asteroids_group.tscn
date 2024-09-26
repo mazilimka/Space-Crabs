@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://clmh84pgamhie"]
+
+[ext_resource type="Script" path="res://Elements/Environments/AsteroidsGroup/asteroids_group.gd" id="1_uw22f"]
+
+[node name="AsteroidsGroup" type="Node2D"]
+script = ExtResource("1_uw22f")

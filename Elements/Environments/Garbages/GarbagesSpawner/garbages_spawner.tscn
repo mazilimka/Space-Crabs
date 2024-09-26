@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://boms66fr7afu5"]
+
+[ext_resource type="Script" path="res://Elements/Environments/Garbages/GarbagesSpawner/garbages_spawner.gd" id="1_8we5c"]
+
+[node name="GarbagesSpawner" type="Node2D"]
+z_index = 2
+script = ExtResource("1_8we5c")

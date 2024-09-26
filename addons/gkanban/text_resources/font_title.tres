@@ -1,7 +1,0 @@
-[gd_resource type="FontFile" load_steps=2 format=3]
-
-[ext_resource type="FontFile" uid="uid://b7i6245t234cd" path="res://Assets/assets/fonts/nunito/Nunito-Black.ttf" id="1"]
-
-[resource]
-size = 30
-font_data = ExtResource( 1 )

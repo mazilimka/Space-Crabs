@@ -1,4 +1,4 @@
-extends "res://Enemies/enemy.gd"
+extends "res://Elements/Enemies/enemy.gd"
 
 #func death():
 	#queue_redraw()

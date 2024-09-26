@@ -20,6 +20,10 @@ func tween_moving():
 	tween.set_loops()
 
 func damage(amount: float):
+	var tween = get_tree().create_tween()
+	tween.tween_property($AnimatedSprite2D, 'modulate', Color.BLACK, 0.15)
+	tween.tween_property($AnimatedSprite2D, 'modulate', Color.WHITE, 0.15)
+	
 	health -= amount
 	update_health_bar()
 	if health <= 0:

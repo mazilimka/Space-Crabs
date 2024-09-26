@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf8a4fk3t8obj"]
+
+[ext_resource type="PackedScene" uid="uid://dridblvhpbjwi" path="res://Elements/Environments/Garbages/BasicGarbage/basic_garbage.tscn" id="1_v1v6x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yg8lv"]
+size = Vector2(28, 28)
+
+[node name="1_Garbage" instance=ExtResource("1_v1v6x")]
+
+[node name="Sprite2D" parent="." index="0"]
+region_rect = Rect2(75.8261, 3.95368, 28.3924, 28.1501)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_yg8lv")

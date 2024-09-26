@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/SettingsWindow/settings.gd" id="1_pq2n3"]
 [ext_resource type="PackedScene" uid="uid://dtp0vkia8sk8v" path="res://UI/universal_h_slider.tscn" id="2_r6n3d"]
 
-[node name="SettingsWindow" type="PanelContainer"]
+[node name="SettingsWindow" type="PanelContainer" node_paths=PackedStringArray("shortcut_context")]
 process_mode = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -13,9 +13,10 @@ anchor_bottom = 0.5
 offset_left = -252.0
 offset_top = -196.0
 offset_right = 253.0
-offset_bottom = 196.0
+offset_bottom = 214.0
 grow_horizontal = 2
 grow_vertical = 2
+shortcut_context = NodePath(".")
 script = ExtResource("1_pq2n3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -31,11 +32,10 @@ theme_override_constants/margin_bottom = 15
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 tab_focus_mode = 0
 
 [node name="Game" type="VBoxContainer" parent="MarginContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -80,7 +80,49 @@ button_pressed = true
 keep_pressed_outside = true
 text = "Distance to start position"
 
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/TabContainer/Game"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Game/MarginContainer5"]
+layout_mode = 2
+text = "Aiming Point"
+
+[node name="AimingPoint" type="OptionButton" parent="MarginContainer/TabContainer/Game/MarginContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+selected = 0
+item_count = 2
+popup/item_0/text = "On"
+popup/item_1/text = "Off"
+popup/item_1/id = 1
+
+[node name="MarginContainer6" type="MarginContainer" parent="MarginContainer/TabContainer/Game"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Game/MarginContainer6"]
+layout_mode = 2
+text = "Aiming Point Color"
+
+[node name="AimingPointColor" type="ColorPickerButton" parent="MarginContainer/TabContainer/Game/MarginContainer6"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(124.96, 24.92)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+flat = true
+color = Color(1, 1, 0, 1)
+edit_alpha = false
+
 [node name="Other" type="VBoxContainer" parent="MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 12
 metadata/_tab_index = 1
@@ -140,31 +182,6 @@ popup/item_1/text = "1.3"
 popup/item_1/id = 1
 popup/item_2/text = "1.5"
 popup/item_2/id = 2
-
-[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/TabContainer/Other"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/MarginContainer3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/Other/MarginContainer3/HBoxContainer"]
-layout_mode = 2
-text = "Cursor Visiblility
-"
-
-[node name="CursorVisiblility" type="OptionButton" parent="MarginContainer/TabContainer/Other/MarginContainer3/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 10
-focus_mode = 0
-selected = 0
-item_count = 2
-popup/item_0/text = "On"
-popup/item_1/text = "By holding down Ctrl"
-popup/item_1/id = 1
 
 [node name="SaveAndExit" type="Button" parent="MarginContainer"]
 unique_name_in_owner = true

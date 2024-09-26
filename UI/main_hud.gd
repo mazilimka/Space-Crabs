@@ -4,14 +4,27 @@ extends CanvasLayer
 @onready var settings: PanelContainer = %Settings
 @onready var score: Label = %Score
 @onready var debug_menu: CanvasLayer = %DebugMenu
-@onready var restart_scene: TextureButton = %RestartScene
 @onready var game_pause: TextureButton = %GamePause
+@onready var virtual_joystick: VirtualJoystick = %VirtualJoystick
 
 
 func _ready() -> void:
 	Events.score_coin_update.connect(update_coin)
-	%RestartScene.pressed.connect(_on_restart_scene_pressed)
 	%GamePause.pressed.connect(_on_game_pause_pressed)
+
+
+func _process(delta: float) -> void:
+	return
+	if Global.SETTINGS['ControlFor'] == 2:
+		%VirtualJoystick.visible = true
+	else: %VirtualJoystick.visible = false
+
+
+func _input(event: InputEvent) -> void:
+	if event and Input.is_action_just_pressed("Escape"):
+		_on_game_pause_pressed()
+		
+		get_viewport().set_input_as_handled()
 
 
 func _on_restart_scene_pressed() -> void:

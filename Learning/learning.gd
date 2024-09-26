@@ -1,8 +1,37 @@
 extends Node
 
 
+var test_vec = Vector2.DOWN
 func _ready():
-	complex_test()
+	print(bubble_sorting([10, 9, 11, 7])) # 7, 9, 10, 11
+
+
+func bubble_sorting(_array: Array):
+	var array = _array
+	var counter := 0
+	for el in array:
+		return
+		# берём элемент массива и сравниваем его со следующем, таки образом, переставляем в конец самое большое число
+		counter += 1
+		#if array[counter] > el:
+			#print(el)
+		#print(array[array.size() - 2])
+
+
+func swap(a, b):
+	var tmp = b
+	b = a
+	a = tmp
+
+
+func test(_dict: Dictionary):
+	#var _copy = _dict.duplicate()
+	_dict.erase(0)
+	pass
+
+
+func test2(_int: Vector2):
+	_int = Vector2.ZERO
 
 
 func complex_test():
@@ -54,9 +83,6 @@ func test_no_odd_numbers_in_array():
 			return 'OK'
 		else:
 			return 'Error'
-
-
-
 
 
 func test_random_number_in_array():
@@ -155,6 +181,7 @@ func test_black_or_white_amount(_number_of_iteration: int):
 			else:
 				print('OK {0} {1}'.format([x + 1, y + 1]))
 
+
 func test_start_cell_color():
 	# Доска 1
 	var size = Vector2.ONE * 70
@@ -176,6 +203,7 @@ func test_start_cell_color():
 				print("Тест не пройден на значениях {0} {1}".format([x+1, y+1]))
 		print(line)
 
+
 func start_cell_color(_input_size_board: Vector2i, _input_cell_color : bool):
 	var size_x = _input_size_board.x
 	var size_y = _input_size_board.y
@@ -183,6 +211,7 @@ func start_cell_color(_input_size_board: Vector2i, _input_cell_color : bool):
 	
 	if (size_x % 2) == (size_y % 2): return input_cell_color
 	else: return not input_cell_color
+
 
 func black_cell_amount(_input_size_board: Vector2i, _input_start_cell_color: bool):
 	var size_x = _input_size_board.x

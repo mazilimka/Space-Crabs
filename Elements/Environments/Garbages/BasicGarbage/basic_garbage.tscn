@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dridblvhpbjwi"]
+
+[ext_resource type="Script" path="res://Elements/Environments/Garbages/BasicGarbage/basic_garbage.gd" id="1_ie8of"]
+[ext_resource type="Texture2D" uid="uid://cufd5xeo4eums" path="res://Assets/Environments/Wang tiles/02-Craters.png" id="1_n35ni"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgvhy"]
+size = Vector2(72, 36)
+
+[node name="BasicGarbage" type="RigidBody2D"]
+z_index = 1
+rotation = -6.28319
+collision_layer = 64
+collision_mask = 66
+sleeping = true
+linear_damp = 0.25
+script = ExtResource("1_ie8of")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_n35ni")
+region_enabled = true
+region_rect = Rect2(0, 0, 72.4923, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sgvhy")

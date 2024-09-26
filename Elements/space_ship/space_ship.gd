@@ -1,7 +1,7 @@
 @icon("res://Assets/space_ship.png")
 extends RigidBody2D
 
-@onready var marker_for_muzzle : Marker2D = $Muzzle/Marker_for_muzzle
+@onready var marker_for_muzzle : Marker2D = %MarkerForMuzzle
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var rocked_scene : PackedScene = preload("res://Elements/Rocked/rocked.tscn")
 @onready var fire_rate_timer : Timer = $FireRate
@@ -11,9 +11,13 @@ const ACCELERATE : float = 1800 #350.0
 const DECELERATE : float = 50.0
 const MAX_SPEED : float = 700.0
 
+var garbages_spawn_pos
+var direction
 var health := 100.0
 var timer : float = 0.0
-var timer_wait_time = 0.2
+var timer_wait_time := 0.2
+var collision_lock = false
+var collided_bodies = []
 
 func _ready():
 	Global.register_new_player(self)
@@ -22,33 +26,24 @@ func _ready():
 
 var _previous_inertia = inertia
 
+
 func set_prev_inertia(value):
 	_previous_inertia = value
 
+
 func _physics_process(delta):
-	var direction = Input.get_vector('left', "right", "up", "down")
+	direction = Input.get_vector('left', "right", "up", "down")
 	
 	if get_contact_count() == 0:
 		set_prev_inertia(linear_velocity.length() * mass)
-	#else:
-		#linear_velocity = Vector2.ZERO
 	
 	var _prev_position = global_position
 	
 	var dir_delta = max(0, direction.dot(linear_velocity.normalized()))
 	apply_central_force(direction * ACCELERATE)# + (direction * ACCELERATE * 1 * dir_delta))
 	
-	
-	#if _prev_position != global_position:
-		#linear_velocity = Vector2.ZERO
-	
 	if linear_velocity.length() > MAX_SPEED:
 		linear_velocity = linear_velocity.normalized() * MAX_SPEED
-	
-	if Input.is_action_just_pressed('mouse_1') and (timer >= timer_wait_time):
-		launch_rocked()
-		#fire_rate_timer.start()
-		timer = 0
 	
 	if linear_velocity != Vector2.ZERO:
 		sprite.rotation = linear_velocity.angle() + deg_to_rad(90)
@@ -64,24 +59,64 @@ func _physics_process(delta):
 			await body_exited
 			collision_lock = false
 
-var collision_lock = false
 
-var collided_bodies = []
+func _unhandled_input(event: InputEvent) -> void:
+	var _rect : Rect2 = get_viewport().get_visible_rect()
+	var camera_pos = get_viewport().get_camera_2d().get_target_position()
+	var _viewport_pos = camera_pos - (_rect.size / 2)
+	
+	if event is InputEventScreenTouch and (timer >= timer_wait_time):
+		launch_rocked(_viewport_pos + event.position)
+		timer = 0
+	
+	if event is InputEventScreenDrag and (timer >= timer_wait_time):
+		if timer != 0:
+			launch_rocked(_viewport_pos + event.position)
+			timer = 0
+	
+	if event is InputEventMouseButton and Input.is_action_just_pressed("shot") and (timer >= timer_wait_time):
+		launch_rocked(get_global_mouse_position())
+		timer = 0
+	
+	if Input.is_joy_known(0):
+		if event is InputEventJoypadButton and Input.is_action_just_pressed("shot") and (timer >= timer_wait_time):
+			var axis_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
+			var axis_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+			launch_rocked(Vector2(axis_x, axis_y))
+			timer = 0
 
-func launch_rocked():
+
+func launch_rocked(_to: Vector2):
+	var axis_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
+	var axis_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+	
 	var rocked_instantiate := rocked_scene.instantiate()
 	add_child(rocked_instantiate)
 	rocked_instantiate.global_position = marker_for_muzzle.global_position
-	rocked_instantiate.set_direction((get_global_mouse_position() - marker_for_muzzle.global_position).normalized(), self)
+	rocked_instantiate.set_direction((_to - marker_for_muzzle.global_position).normalized(), self)
+	if Input.is_joy_known(0):
+		rocked_instantiate.set_direction(_to.normalized(), self)
+		return
+
 
 func update_hp_bar():
 	$HPBar.value = health
 
+
 func damage(amount: float):
+	var tween = get_tree().create_tween()
+	tween.tween_property($Sprite2D, 'modulate', Color.RED, 0.1)
+	tween.tween_property($Sprite2D, 'modulate', Color.WHITE, 0.1)
+	
+	if Input.joy_connection_changed:
+		Input.start_joy_vibration(0, 0.5, 0.5, 1)
+	
 	health -= amount
 	update_hp_bar()
 	if health <= 0:
 		death()
+		Input.stop_joy_vibration(0)
+
 
 func death():
 	queue_free()

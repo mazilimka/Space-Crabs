@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cywnk0lbe1pe6"]
+
+[ext_resource type="PackedScene" uid="uid://dridblvhpbjwi" path="res://Elements/Environments/Garbages/BasicGarbage/basic_garbage.tscn" id="1_okfxx"]
+
+[node name="2_Garbage" instance=ExtResource("1_okfxx")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.5, 1.5)
+region_rect = Rect2(123, 2, 6, 32)
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+disabled = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="2"]
+scale = Vector2(1.5, 1.5)
+polygon = PackedVector2Array(-3, -14, -1, -16, 1, -16, 3, -14, 3, 14, 1, 16, -1, 16, -3, 14)
