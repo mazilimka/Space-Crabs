@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://73n85pceyluo"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_pxe4o"]
+[ext_resource type="Texture2D" uid="uid://dbrkdlg0ghvtc" path="res://Assets/godot-invader-small.png" id="2_5wqe5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gifs"]
+atlas = ExtResource("2_5wqe5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnbja"]
+atlas = ExtResource("2_5wqe5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wxjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gifs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnbja")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dcuh1"]
+radius = 320.0
+
+[sub_resource type="Animation" id="Animation_kp1gt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TringularEnemy:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-220, -320)]
+}
+
+[sub_resource type="Animation" id="Animation_uxyrv"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TringularEnemy:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333, 1.03333, 1.53333, 2, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-220, -320), Vector2(220, -320), Vector2(0, 0), Vector2(220, 320), Vector2(-220, 320), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kme8l"]
+_data = {
+"RESET": SubResource("Animation_kp1gt"),
+"new_animation": SubResource("Animation_uxyrv")
+}
+
+[node name="TringularEnemy" type="Node2D"]
+
+[node name="TringularEnemy" type="CharacterBody2D" parent="." groups=["Enemies"]]
+z_index = 4
+position = Vector2(-220, -320)
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 10
+slide_on_ceiling = false
+script = ExtResource("1_pxe4o")
+rate_of_fire = 0.15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TringularEnemy"]
+shape = SubResource("CapsuleShape2D_1vakt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TringularEnemy"]
+sprite_frames = SubResource("SpriteFrames_4wxjh")
+autoplay = "default"
+frame_progress = 0.926814
+
+[node name="HPBar" type="Control" parent="TringularEnemy"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="TringularEnemy/HPBar"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_left = -6.0
+offset_top = -12.0
+offset_right = 94.0
+offset_bottom = 8.0
+scale = Vector2(0.125, 0.125)
+theme_override_font_sizes/font_size = 11
+value = 100.0
+
+[node name="Area2D" type="Area2D" parent="TringularEnemy"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TringularEnemy/Area2D"]
+shape = SubResource("CircleShape2D_dcuh1")
+
+[node name="TimerBeforeShot" type="Timer" parent="TringularEnemy"]
+process_callback = 0
+
+[node name="PivotNode" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="PivotNode"]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PivotNode/Marker2D"]
+remote_path = NodePath("../../../TringularEnemy")
+update_rotation = false
+update_scale = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["Enemies"]]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_kme8l")
+}
+autoplay = "new_animation"
+speed_scale = 0.45

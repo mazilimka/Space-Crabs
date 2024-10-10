@@ -1,0 +1,140 @@
+[gd_scene load_steps=11 format=3 uid="uid://bvl7xpdypxecv"]
+
+[ext_resource type="Texture2D" uid="uid://dbrkdlg0ghvtc" path="res://Assets/godot-invader-small.png" id="1_kwrq8"]
+[ext_resource type="Script" path="res://Elements/Enemies/SquareEnemy/square_enemy.gd" id="1_x2jte"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gifs"]
+atlas = ExtResource("1_kwrq8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnbja"]
+atlas = ExtResource("1_kwrq8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wxjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gifs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnbja")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dcuh1"]
+radius = 320.0
+
+[sub_resource type="Animation" id="Animation_jsomp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SquareEnemy:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-300, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cygp8"]
+resource_name = "new_animation"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SquareEnemy:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-300, 0), Vector2(-300, -300), Vector2(0, -300), Vector2(300, -300), Vector2(300, 0), Vector2(300, 300), Vector2(0, 300), Vector2(-300, 300), Vector2(-300, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wpvgt"]
+_data = {
+"RESET": SubResource("Animation_jsomp"),
+"new_animation": SubResource("Animation_cygp8")
+}
+
+[node name="SquareEnemy" type="Node2D"]
+
+[node name="SquareEnemy" type="CharacterBody2D" parent="." groups=["Enemies"]]
+z_index = 4
+position = Vector2(-300, 0)
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 10
+slide_on_ceiling = false
+script = ExtResource("1_x2jte")
+rate_of_fire = 0.2
+health = 120
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareEnemy"]
+shape = SubResource("CapsuleShape2D_1vakt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SquareEnemy"]
+sprite_frames = SubResource("SpriteFrames_4wxjh")
+autoplay = "default"
+frame_progress = 0.926814
+
+[node name="HPBar" type="Control" parent="SquareEnemy"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="SquareEnemy/HPBar"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_left = -6.0
+offset_top = -12.0
+offset_right = 94.0
+offset_bottom = 8.0
+scale = Vector2(0.125, 0.125)
+theme_override_font_sizes/font_size = 11
+value = 100.0
+
+[node name="Area2D" type="Area2D" parent="SquareEnemy"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareEnemy/Area2D"]
+shape = SubResource("CircleShape2D_dcuh1")
+
+[node name="TimerBeforeShot" type="Timer" parent="SquareEnemy"]
+process_callback = 0
+wait_time = 0.15
+
+[node name="PivotNode" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="PivotNode"]
+position = Vector2(-350, 0)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PivotNode/Marker2D"]
+remote_path = NodePath("../../../SquareEnemy")
+update_rotation = false
+update_scale = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 0
+libraries = {
+"": SubResource("AnimationLibrary_wpvgt")
+}
+autoplay = "new_animation"
+speed_scale = 0.5

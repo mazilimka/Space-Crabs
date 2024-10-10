@@ -5,6 +5,7 @@ func _on_body_entered(body):
 	Global.add_coin()
 	Events.coin_pickup.emit()
 	tween_pickup()
+	Spawner.lvl_counter += 1
 
 
 func tween_pickup():

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://byqe0orrjys4y"]
+
+[ext_resource type="Texture2D" uid="uid://cnn76iv2jbak3" path="res://Assets/Environments/ShipShop/ShipShop1.png" id="1_vtjbp"]
+[ext_resource type="Texture2D" uid="uid://bkt56gq0nt86a" path="res://Assets/Environments/ShipShop/ShipShop2.png" id="2_fidjy"]
+[ext_resource type="Script" path="res://TestScenes/Shop/test_shop.gd" id="2_gflgv"]
+[ext_resource type="Texture2D" uid="uid://c7sd2w58pwvic" path="res://Assets/Environments/ShipShop/ShipShop3.png" id="3_4reei"]
+[ext_resource type="Texture2D" uid="uid://c07yus7tcmffm" path="res://Assets/Environments/ShipShop/ShipShop4.png" id="4_u53xw"]
+[ext_resource type="Texture2D" uid="uid://5wsovt8nf83s" path="res://Assets/Environments/ShipShop/ShipShop5.png" id="5_f7wn0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6upr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vtjbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fidjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4reei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u53xw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f7wn0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ard2o"]
+size = Vector2(361.151, 359.024)
+
+[node name="TestShop" type="AnimatedSprite2D"]
+scale = Vector2(1.12695, 0.320313)
+sprite_frames = SubResource("SpriteFrames_x6upr")
+script = ExtResource("2_gflgv")
+
+[node name="Area2D" type="Area2D" parent="." groups=["SpaceShip"]]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.443665, -1.56104)
+shape = SubResource("RectangleShape2D_ard2o")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://8nb5oulyqema"]
+
+[ext_resource type="Script" path="res://Elements/space_ship/ArrowToStore/arrow_to_store.gd" id="1_r55wq"]
+[ext_resource type="Texture2D" uid="uid://j2ug0nephw5s" path="res://Assets/Simple Shapes/Triangle.png" id="2_4jf5b"]
+
+[node name="ArrowToStore" type="Node2D"]
+script = ExtResource("1_r55wq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0912232, 0.882813, 0.0241394, 1)
+position = Vector2(16.0257, 2.63391e-07)
+rotation = 1.5708
+scale = Vector2(0.012568, 0.100461)
+texture = ExtResource("2_4jf5b")

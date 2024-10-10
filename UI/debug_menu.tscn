@@ -6,17 +6,17 @@ script/source = "extends CanvasLayer
 
 
 func _ready() -> void:
-	visible = Global.SETTINGS['Cheats']
+	visible = Settings.SETTINGS['Cheats']
 	
 	%TeleportToCoin.pressed.connect(_on_button_pressed)
 	%TeleportToStartPosition.pressed.connect(_on_start_position_pressed)
-	
+	emit_signal(\"child_entered_tree\")
 
 #DEBUG UI
 func _on_button_pressed():
 	var coin = Global.get_lvl().last_spawned_coin
 	if coin:
-		Global.Player.global_position = coin.global_position + Vector2(50, 0)
+		Global.Player.global_position = coin + Vector2(50, 0)
 		Global.Player.linear_velocity = Vector2.ZERO
 
 #DEBUG UI

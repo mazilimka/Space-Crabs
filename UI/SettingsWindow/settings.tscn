@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://djrel1vr6dvsd"]
+[gd_scene load_steps=2 format=3 uid="uid://djrel1vr6dvsd"]
 
 [ext_resource type="Script" path="res://UI/SettingsWindow/settings.gd" id="1_pq2n3"]
-[ext_resource type="PackedScene" uid="uid://dtp0vkia8sk8v" path="res://UI/universal_h_slider.tscn" id="2_r6n3d"]
 
-[node name="SettingsWindow" type="PanelContainer" node_paths=PackedStringArray("shortcut_context")]
-process_mode = 2
+[node name="SettingsWindow" type="PanelContainer"]
+process_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -16,7 +15,6 @@ offset_right = 253.0
 offset_bottom = 214.0
 grow_horizontal = 2
 grow_vertical = 2
-shortcut_context = NodePath(".")
 script = ExtResource("1_pq2n3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -127,34 +125,6 @@ layout_mode = 2
 theme_override_constants/separation = 12
 metadata/_tab_index = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Other"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Other/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/TabContainer/Other/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "Camera Position Smoothing"
-
-[node name="CameraPositionSmoothingButton" parent="MarginContainer/TabContainer/Other/MarginContainer/HBoxContainer" instance=ExtResource("2_r6n3d")]
-visible = false
-layout_mode = 2
-
-[node name="CameraSmoothing" type="CheckButton" parent="MarginContainer/TabContainer/Other/MarginContainer/HBoxContainer"]
-unique_name_in_owner = true
-process_mode = 2
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.0
-focus_mode = 0
-keep_pressed_outside = true
-flat = true
-
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/TabContainer/Other"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
@@ -173,8 +143,8 @@ text = "Camera Zoom"
 
 [node name="CameraZoom" type="OptionButton" parent="MarginContainer/TabContainer/Other/MarginContainer2/HBoxContainer2"]
 unique_name_in_owner = true
-process_mode = 2
 layout_mode = 2
+focus_mode = 0
 selected = 0
 item_count = 3
 popup/item_0/text = "1.0"

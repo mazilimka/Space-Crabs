@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpt6t5dqkl8dy"]
+[gd_scene load_steps=8 format=3 uid="uid://cpt6t5dqkl8dy"]
 
 [ext_resource type="PackedScene" uid="uid://fjjhfqi7gqw7" path="res://Elements/space_ship/Muzzle/muzzle.tscn" id="1_a41je"]
 [ext_resource type="Script" path="res://Elements/space_ship/space_ship.gd" id="1_u281d"]
-[ext_resource type="Texture2D" uid="uid://vahviuofypt5" path="res://Build/Space Crabs.v0.2/Assets/Spaceships/space_ship.png" id="2_fsvlo"]
+[ext_resource type="Texture2D" uid="uid://vahviuofypt5" path="res://Assets/Spaceships/space_ship.png" id="2_fsvlo"]
+[ext_resource type="PackedScene" uid="uid://8nb5oulyqema" path="res://Elements/space_ship/ArrowToStore/arrow_to_store.tscn" id="3_upqry"]
 [ext_resource type="PackedScene" uid="uid://cs0l2xueytl3w" path="res://Elements/space_ship/Arrow/arrow.tscn" id="4_t87pn"]
 [ext_resource type="PackedScene" uid="uid://3r3lreh28mmw" path="res://Elements/space_ship/SpaceShipUD/space_ship_hud.tscn" id="5_nqlav"]
 
@@ -19,6 +20,9 @@ can_sleep = false
 lock_rotation = true
 script = ExtResource("1_u281d")
 
+[node name="ArrowToStore" parent="." instance=ExtResource("3_upqry")]
+position = Vector2(0, 1)
+
 [node name="Muzzle" parent="." instance=ExtResource("1_a41je")]
 unique_name_in_owner = true
 position = Vector2(0, -3)
@@ -30,6 +34,7 @@ position = Vector2(187.5, 0.875267)
 scale = Vector2(45990.5, -5084.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 texture = ExtResource("2_fsvlo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -45,8 +50,18 @@ offset_left = -34.0
 offset_top = -43.0
 offset_right = 38.67
 offset_bottom = -16.0
-theme_override_constants/outline_size = 0
-value = 100.0
+show_percentage = false
+
+[node name="HPCounter" type="Label" parent="HPBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = -1.0
+offset_right = 72.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 21
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CameraTransform2D" type="RemoteTransform2D" parent="."]
 unique_name_in_owner = true

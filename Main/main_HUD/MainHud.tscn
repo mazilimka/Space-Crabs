@@ -1,16 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdyh467doaoc6"]
+[gd_scene load_steps=8 format=3 uid="uid://bdyh467doaoc6"]
 
 [ext_resource type="Script" path="res://UI/main_hud.gd" id="1_mcl21"]
 [ext_resource type="PackedScene" uid="uid://txiqrwa1qd6f" path="res://UI/debug_menu.tscn" id="2_sw5b4"]
 [ext_resource type="Texture2D" uid="uid://dcoymcxlfpo4n" path="res://Assets/UI_icon/Pause.png" id="4_h5ayf"]
 [ext_resource type="PackedScene" uid="uid://b4fk84k7nqivt" path="res://UI/DeathWindow/death_window.tscn" id="5_xt22b"]
 [ext_resource type="PackedScene" uid="uid://djrel1vr6dvsd" path="res://UI/SettingsWindow/settings.tscn" id="6_ha0jh"]
+[ext_resource type="PackedScene" uid="uid://ha1b8w0whlk" path="res://UI/ShipShop/ship_shop.tscn" id="7_cj4rn"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_yyrso"]
 
 [node name="MainHud" type="CanvasLayer"]
 process_mode = 3
 layer = 2
 script = ExtResource("1_mcl21")
+
+[node name="ShipShop" parent="." instance=ExtResource("7_cj4rn")]
+unique_name_in_owner = true
+visible = false
 
 [node name="DebugMenu" parent="." instance=ExtResource("2_sw5b4")]
 unique_name_in_owner = true
@@ -40,16 +45,15 @@ texture_normal = ExtResource("4_h5ayf")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="DeathWindow" parent="." instance=ExtResource("5_xt22b")]
-unique_name_in_owner = true
-process_mode = 2
-visible = false
-offset_top = -88.0
-offset_bottom = 88.0
-
 [node name="Settings" parent="." instance=ExtResource("6_ha0jh")]
 unique_name_in_owner = true
 visible = false
 
+[node name="DeathWindow" parent="." instance=ExtResource("5_xt22b")]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+
 [node name="VirtualJoystick" parent="." instance=ExtResource("7_yyrso")]
 unique_name_in_owner = true
+visible = false

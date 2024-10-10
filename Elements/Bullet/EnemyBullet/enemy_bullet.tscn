@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://wsu6imheh7qn"]
+
+[ext_resource type="Texture2D" uid="uid://c1mxg2qe3vjqj" path="res://Assets/BackgroundEffects/Asteroid - Flame.png" id="1_85u5i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j60bh"]
+atlas = ExtResource("1_85u5i")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm4bq"]
+atlas = ExtResource("1_85u5i")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6orvh"]
+atlas = ExtResource("1_85u5i")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ao8gy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j60bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm4bq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6orvh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irta3"]
+radius = 8.0
+height = 38.0
+
+[node name="EnemyBullet" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_ao8gy")
+frame_progress = 0.325477
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8.57, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_irta3")

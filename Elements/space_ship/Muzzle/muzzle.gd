@@ -3,11 +3,11 @@ extends Node2D
 @onready var aiming_point: Node2D = $AimingPoint
 
 func _process(delta):
-	if Global.SETTINGS['AimingPoint'] == 0:
+	if Settings.SETTINGS['AimingPoint'] == 0:
 		aiming_point.show()
 	else: aiming_point.hide()
 
-	aiming_point.modulate = Global.SETTINGS['AimingPointColor']
+	aiming_point.modulate = Settings.SETTINGS['AimingPointColor']
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -15,11 +15,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	var camera_pos = get_viewport().get_camera_2d().get_target_position()
 	var _viewport_pos = camera_pos - (_rect.size / 2)
 	
-	if event is InputEventScreenTouch:
-		look_at(_viewport_pos + event.position)
-		
-	if event is InputEventScreenDrag:
-		look_at(_viewport_pos + event.position)
+	#if event is InputEventScreenTouch:
+		#look_at(_viewport_pos + event.position)
+		#
+	#if event is InputEventScreenDrag:
+		#look_at(_viewport_pos + event.position)
 	
 	if event is InputEventMouseMotion:
 		look_at(get_global_mouse_position())

@@ -8,9 +8,9 @@ scale = Vector2(0.133333, 0.0714286)
 script = ExtResource("2_ghg6d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(232.053, 0.000622829)
+position = Vector2(73.1332, 4.7541e-05)
 rotation = 1.5708
-scale = Vector2(2.44242, 3.45789)
+scale = Vector2(2.44242, 1.18761)
 texture = ExtResource("1_bjhax")
 
 [node name="AimingPoint" type="Node2D" parent="."]

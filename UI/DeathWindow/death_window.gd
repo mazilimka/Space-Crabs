@@ -10,14 +10,23 @@ func _ready() -> void:
 	%GoToMainScene.pressed.connect(_on_go_to_main_pressed)
 
 
+func open():
+	show()
+	MainHud.change_stage('DeathWindow')
+	get_parent().current_menu = self
+
+func close():
+	hide()
+	MainHud.change_stage('GameplayHud')
+	get_tree().paused = false
+
+
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("Escape"):
-		#breakpoint
-		accept_event()
-		get_viewport().set_input_as_handled()
+	if get_parent().current_menu != self:
+		return
+	if event.is_action_pressed("Escape") and Input.is_action_just_pressed("Escape"):
 		_on_back_pressed()
-		#get_viewport().set_handle_input_locally(false)
-		#print(get_viewport().is_input_handled())
+		get_viewport().set_input_as_handled()
 
 
 func _on_restart_game_pressed():
@@ -32,13 +41,12 @@ func _on_quit_pressed():
 
 
 func _on_back_pressed():
-	hide()
-	get_tree().paused = false
+	close()
 
 
 func _on_settings_pressed():
 	hide()
-	MainHud.settings.show()
+	MainHud.settings.open()
 
 
 func _on_go_to_test_main_pressed():

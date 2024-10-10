@@ -22,11 +22,14 @@ config/icon="res://Assets/Planets/planet-saturn-pixel-art-png.png"
 [autoload]
 
 Events="*res://IndividualScripts/Autoload/Events.gd"
-Global="*res://IndividualScripts/Autoload/Global.gd"
 MainHud="*res://Main/main_HUD/MainHud.tscn"
+Global="*res://IndividualScripts/Autoload/Global.gd"
+Settings="*res://IndividualScripts/Autoload/Settings.gd"
+Spawner="*res://IndividualScripts/Autoload/Spawner.gd"
 
 [display]
 
+window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -116,10 +119,6 @@ RestartGame={
 ]
 }
 
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
 [layer_names]
 
 2d_render/layer_2="Background"
@@ -143,5 +142,6 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true

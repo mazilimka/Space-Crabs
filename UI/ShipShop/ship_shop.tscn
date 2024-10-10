@@ -1,0 +1,143 @@
+[gd_scene load_steps=14 format=3 uid="uid://ha1b8w0whlk"]
+
+[ext_resource type="Script" path="res://UI/ShipShop/ship_shop.gd" id="1_k2gv1"]
+[ext_resource type="Texture2D" uid="uid://vahviuofypt5" path="res://Assets/Spaceships/space_ship.png" id="2_vf7s0"]
+[ext_resource type="Texture2D" uid="uid://58bewpih18se" path="res://Assets/Spaceships/ship_1.png" id="3_hiyxo"]
+[ext_resource type="Texture2D" uid="uid://cw2hc1jxk5ea2" path="res://Assets/Spaceships/ship_2.png" id="4_mir44"]
+[ext_resource type="Texture2D" uid="uid://dd0ecc8ulqer8" path="res://Assets/Spaceships/ship_3.png" id="5_1o7kw"]
+[ext_resource type="Texture2D" uid="uid://ddejf5wkpv4it" path="res://Assets/Spaceships/Spaceship#01(24x24).png" id="6_50hed"]
+[ext_resource type="Texture2D" uid="uid://buc4u7mg3x8p3" path="res://Assets/Spaceships/Spaceship#02(24x24).png" id="7_318wq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htwpd"]
+atlas = ExtResource("2_vf7s0")
+region = Rect2(9, 11, 30, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aml02"]
+atlas = ExtResource("3_hiyxo")
+region = Rect2(2, 1, 29, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rsk3"]
+atlas = ExtResource("4_mir44")
+region = Rect2(0, 1, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coogg"]
+atlas = ExtResource("5_1o7kw")
+region = Rect2(0, 0, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqedx"]
+atlas = ExtResource("6_50hed")
+region = Rect2(1, 0, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oelt"]
+atlas = ExtResource("7_318wq")
+region = Rect2(0, 0, 24, 24)
+
+[node name="ShipShop" type="Panel"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -498.0
+offset_top = -278.0
+offset_right = 498.0
+offset_bottom = 278.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k2gv1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.789063, 0.147949, 0.147949, 0.333333)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 23
+
+[node name="ShipList" type="ItemList" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256.595, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/icon_margin = 25
+theme_override_constants/v_separation = 65
+theme_override_constants/h_separation = 25
+theme_override_font_sizes/font_size = 28
+item_count = 6
+icon_scale = 2.215
+item_0/text = "Ship 1"
+item_0/icon = SubResource("AtlasTexture_htwpd")
+item_1/text = "Ship 2"
+item_1/icon = SubResource("AtlasTexture_aml02")
+item_2/text = "Ship 3"
+item_2/icon = SubResource("AtlasTexture_1rsk3")
+item_3/text = "Ship 4"
+item_3/icon = SubResource("AtlasTexture_coogg")
+item_4/text = "Ship 5"
+item_4/icon = SubResource("AtlasTexture_gqedx")
+item_5/text = "Ship 6"
+item_5/icon = SubResource("AtlasTexture_8oelt")
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ShipPreview" type="TextureRect" parent="HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_vf7s0")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Info" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "
+
+"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 10
+
+[node name="Buy" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 12
+focus_mode = 0
+text = "Buy"
+
+[node name="Exit" type="Button" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 12
+focus_mode = 0
+text = "Exit"

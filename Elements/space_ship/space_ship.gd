@@ -3,32 +3,34 @@ extends RigidBody2D
 
 @onready var marker_for_muzzle : Marker2D = %MarkerForMuzzle
 @onready var sprite : Sprite2D = $Sprite2D
-@onready var rocked_scene : PackedScene = preload("res://Elements/Rocked/rocked.tscn")
+@onready var rocked_scene : PackedScene = preload('res://Elements/Bullet/Rocked/rocked.tscn')
 @onready var fire_rate_timer : Timer = $FireRate
 @onready var arrow = %Arrow
+@onready var space_ship_hud: Control = $SpaceShipHUD
+
+@export var max_health := 0
+@export var health := 100000.0
 
 const ACCELERATE : float = 1800 #350.0
 const DECELERATE : float = 50.0
 const MAX_SPEED : float = 700.0
 
+var rate_of_fire = Global.SHIPS['ship_1']['rate_of_fire']
+var current_ship
 var garbages_spawn_pos
 var direction
-var health := 100.0
 var timer : float = 0.0
-var timer_wait_time := 0.2
 var collision_lock = false
 var collided_bodies = []
 
 func _ready():
+	upgrage_ship(Global.SHIPS['ship_1'], Global.SHIP_ID['id_1'])
+	
 	Global.register_new_player(self)
 	contact_monitor = true
 	max_contacts_reported = 5
 
 var _previous_inertia = inertia
-
-
-func set_prev_inertia(value):
-	_previous_inertia = value
 
 
 func _physics_process(delta):
@@ -49,6 +51,9 @@ func _physics_process(delta):
 		sprite.rotation = linear_velocity.angle() + deg_to_rad(90)
 	timer += delta
 	
+	$HPBar.value = health
+	%HPCounter.text = str(int(health))
+	
 	var _coll = get_colliding_bodies()
 
 	for el in _coll:
@@ -60,26 +65,30 @@ func _physics_process(delta):
 			collision_lock = false
 
 
+func set_prev_inertia(value):
+	_previous_inertia = value
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	var _rect : Rect2 = get_viewport().get_visible_rect()
 	var camera_pos = get_viewport().get_camera_2d().get_target_position()
 	var _viewport_pos = camera_pos - (_rect.size / 2)
 	
-	if event is InputEventScreenTouch and (timer >= timer_wait_time):
-		launch_rocked(_viewport_pos + event.position)
-		timer = 0
+	#if event is InputEventScreenTouch and (timer >= rate_of_fire):
+		#launch_rocked(_viewport_pos + event.position)
+		#timer = 0
+	#
+	#if event is InputEventScreenDrag and (timer >= rate_of_fire):
+		#if timer != 0:
+			#launch_rocked(_viewport_pos + event.position)
+			#timer = 0
 	
-	if event is InputEventScreenDrag and (timer >= timer_wait_time):
-		if timer != 0:
-			launch_rocked(_viewport_pos + event.position)
-			timer = 0
-	
-	if event is InputEventMouseButton and Input.is_action_just_pressed("shot") and (timer >= timer_wait_time):
+	if event is InputEventMouseButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
 		launch_rocked(get_global_mouse_position())
 		timer = 0
 	
 	if Input.is_joy_known(0):
-		if event is InputEventJoypadButton and Input.is_action_just_pressed("shot") and (timer >= timer_wait_time):
+		if event is InputEventJoypadButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
 			var axis_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 			var axis_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 			launch_rocked(Vector2(axis_x, axis_y))
@@ -99,8 +108,23 @@ func launch_rocked(_to: Vector2):
 		return
 
 
+func upgrage_ship(_dict: Dictionary, _id: Dictionary):
+	current_ship = _id['name']
+	#max_health = _dict['hp']
+	#health = _dict['hp']
+	mass = _dict['mass']
+	rate_of_fire = _dict['rate_of_fire']
+	%Sprite2D.texture = load(_dict['texture'])
+	#update_max_hp()
+	#update_hp_bar()
+
+
 func update_hp_bar():
 	$HPBar.value = health
+	#%HPCounter.text = str(int(health))
+
+func update_max_hp():
+	$HPBar.max_value = max_health
 
 
 func damage(amount: float):

@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://d0y8je72dkmp"]
+
+[ext_resource type="Script" path="res://Elements/Environments/ShipShopArea/ship_shop_area.gd" id="1_a7jkq"]
+[ext_resource type="Texture2D" uid="uid://cnn76iv2jbak3" path="res://Assets/Environments/ShipShop/ShipShop1.png" id="1_vdwmx"]
+[ext_resource type="Texture2D" uid="uid://bkt56gq0nt86a" path="res://Assets/Environments/ShipShop/ShipShop2.png" id="2_fdt1j"]
+[ext_resource type="Texture2D" uid="uid://c7sd2w58pwvic" path="res://Assets/Environments/ShipShop/ShipShop3.png" id="3_xvr55"]
+[ext_resource type="Texture2D" uid="uid://c07yus7tcmffm" path="res://Assets/Environments/ShipShop/ShipShop4.png" id="4_aw7q2"]
+[ext_resource type="Texture2D" uid="uid://5wsovt8nf83s" path="res://Assets/Environments/ShipShop/ShipShop5.png" id="5_jphk6"]
+[ext_resource type="Texture2D" uid="uid://buc4u7mg3x8p3" path="res://Assets/Spaceships/Spaceship#02(24x24).png" id="7_dprgy"]
+[ext_resource type="Texture2D" uid="uid://58bewpih18se" path="res://Assets/Spaceships/ship_1.png" id="8_vav1c"]
+[ext_resource type="Texture2D" uid="uid://cw2hc1jxk5ea2" path="res://Assets/Spaceships/ship_2.png" id="9_jwtl1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gy2cl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vdwmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fdt1j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xvr55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aw7q2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jphk6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrcnr"]
+size = Vector2(76, 80)
+
+[node name="ShipShopArea" type="Node2D"]
+z_index = 1
+scale = Vector2(1.96, 1.96)
+script = ExtResource("1_a7jkq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.91667, 1.91667)
+sprite_frames = SubResource("SpriteFrames_gy2cl")
+autoplay = "default"
+frame_progress = 0.949836
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_hrcnr")
+
+[node name="Spaceship#02(24x24)" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.780392)
+position = Vector2(31.6327, 30.6122)
+scale = Vector2(0.892857, 0.892857)
+texture = ExtResource("7_dprgy")
+
+[node name="Ship1" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.780392)
+position = Vector2(-31.6327, 30.102)
+scale = Vector2(0.765306, 0.765306)
+texture = ExtResource("8_vav1c")
+
+[node name="Ship2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.780392)
+position = Vector2(0, 30.102)
+scale = Vector2(0.733418, 0.733418)
+texture = ExtResource("9_jwtl1")

@@ -2,26 +2,60 @@ extends Node
 
 
 var test_vec = Vector2.DOWN
+
 func _ready():
-	print(bubble_sorting([10, 9, 11, 7])) # 7, 9, 10, 11
+	var a = 1
+	while a <= 4:
+		print(a)
+		a += 1
+	#bubble_sorting(arr_for_bubble_sort) # 7, 9, 10, 11
 
 
+var arr_for_bubble_sort = [93299, 10, 9, 11, 7,2344, 234, 949499]
 func bubble_sorting(_array: Array):
-	var array = _array
 	var counter := 0
-	for el in array:
-		return
-		# берём элемент массива и сравниваем его со следующем, таки образом, переставляем в конец самое большое число
+	var swap_check = false
+	
+	while swap_check == false:
+		swap_check = true
+		for index in range(1, _array.size() - counter):
+			if (_array[index - 1]) > _array[index]:
+				swap_check = false
+				swap(_array, index - 1, index)
 		counter += 1
-		#if array[counter] > el:
-			#print(el)
-		#print(array[array.size() - 2])
+		
+	#for i in _array.size():
+		#if _array[i] > _array[i + 1]:
+			#temp = _array[i]
+			#_array[i] = _array[i + 1]
+			#_array[i + 1] = temp
+	
+	#for curr_el in array:
+		#counter += 1
+		#if curr_el == array[0]:
+			#prev_el = curr_el
+			#continue
+		#if prev_el > curr_el:
+			# взять текущий и поменять местами с предыдущим
+			#print(array[array.find(prev_el)])
+			#print(array[array.find(curr_el)])
+			#temp = prev_el
+			#array[array.find(prev_el)] = array[array.find(curr_el)]
+			#array[array.find(curr_el)] = array[array.find(temp)]
+			#prev_el = curr_el
+			#print()
+		#elif prev_el < curr_el:
+			#pass
+	#print(array.back())
+	#array.resize(array.size() - 1)
+	print(_array)
+	#print(counter)
 
 
-func swap(a, b):
-	var tmp = b
-	b = a
-	a = tmp
+func swap(_arr: Array, prev_el: int, curr_el: int):
+	var tmp = _arr[prev_el]
+	_arr[prev_el] = _arr[curr_el]
+	_arr[curr_el] = tmp
 
 
 func test(_dict: Dictionary):
