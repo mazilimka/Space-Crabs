@@ -1,3 +1,1 @@
-### My first game project!
-
-Godot 4.3+
+Godot 4.3+ project
