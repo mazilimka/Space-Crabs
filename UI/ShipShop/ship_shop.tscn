@@ -54,7 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.789063, 0.147949, 0.147949, 0.333333)
+color = Color(0.788235, 0.14902, 0.14902, 0.333333)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -100,6 +100,7 @@ unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("2_vf7s0")
 expand_mode = 2
+stretch_mode = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -115,13 +116,15 @@ size_flags_horizontal = 8
 
 [node name="Info" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(151.42, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 18
 text = "
-
 "
+autowrap_mode = 2
+justification_flags = 235
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

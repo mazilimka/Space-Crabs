@@ -19,5 +19,4 @@ texture = ExtResource("2_b21wl")
 
 [node name="GravityZero" parent="." index="2"]
 scale = Vector2(1, 1)
-gravity_point = false
 gravity = 600.0

@@ -11,6 +11,10 @@ func _ready() -> void:
 
 
 func open():
+	if Global.is_space_ship_death:
+		%Back.hide()
+	else: 
+		%Back.show()
 	show()
 	MainHud.change_stage('DeathWindow')
 	get_parent().current_menu = self
@@ -30,6 +34,12 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_restart_game_pressed():
+	Global.is_space_ship_death = false
+	Global.delete_array_ship()
+	Global.PURCHASED_SHIP.append(Global.SHIP_ID['id_1']['name'])
+	Global.is_restart_game = true
+	Global.is_continue_game = false
+	
 	get_tree().paused = false
 	Global.get_lvl().get_tree().reload_current_scene()
 	hide()

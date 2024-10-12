@@ -35,5 +35,4 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bqi1v")
 
 [node name="GravityZero" parent="." index="2"]
-gravity_point = false
 gravity = 0.0

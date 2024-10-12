@@ -2,6 +2,9 @@ extends Node
 
 @onready var coin_scene := preload("res://Elements/Coin/coin.tscn").instantiate()
 
+var is_restart_game := false
+var is_continue_game := false
+var is_space_ship_death := false
 var score : int = 0
 var coin_position := Vector2()
 var window_is_active := false
@@ -29,7 +32,9 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			2.0,
 		'price' = 
-			0
+			0,
+		'info' =
+			'The most ordinary ship'
 	},
 	"ship_2" = {
 		"id" = 
@@ -43,7 +48,9 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			1.7,
 		'price' = 
-			1
+			2,
+		'info' = 
+			'The rate of fire and maneuverability are better'
 	},
 	'ship_3' = {
 		"id" = 
@@ -57,7 +64,9 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			1.4,
 		'price' = 
-			3
+			3,
+		'info' =
+			'The rate of fire and maneuverability have become even better'
 	},
 	'ship_4' = {
 		"id" = 
@@ -71,7 +80,9 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			1.0,
 		'price' =
-			 5
+			 6,
+		'info' = 
+			'The rate of fire has improved'
 	},
 	'ship_5' = {
 		"id" = 
@@ -85,7 +96,9 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			0.5,
 		'price' = 
-			6
+			7,
+		'info' = 
+			'Maneuverability is behaving strangely...'
 	},
 	'ship_6' = {
 		"id" = 
@@ -99,13 +112,19 @@ var SHIPS : Dictionary = {
 		'mass' =
 			0.25,
 		'price' =
-			 11
+			 11,
+		'info' = 
+			'What for?'
 	}
 }
 
 
 #func _ready() -> void:
 	#greet_win_run()
+
+
+func delete_array_ship():
+	PURCHASED_SHIP.clear()
 
 
 func greet_win_run():

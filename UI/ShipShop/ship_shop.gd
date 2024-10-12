@@ -32,9 +32,20 @@ func use_buy_button():
 		Global.Player.upgrage_ship(Global.SHIPS[selected_ship_name], Global.SHIP_ID[array_ship_id])
 		Global.PURCHASED_SHIP.append(Global.SHIP_ID[array_ship_id]['name'])
 		Global.set_coin(Global.score - Global.SHIPS[selected_ship_name]['price'])
+		
+		%Buy.disabled = true
+		%Buy.text = 'Equip'
 	else: 
 		Global.Player.upgrage_ship(Global.SHIPS[selected_ship_name], Global.SHIP_ID[array_ship_id])
 	close()
+	
+	if Global.is_continue_game == true:
+		%ShipList.select(0)
+		return
+	if Global.PURCHASED_SHIP.size() == 6:
+		MainHud.change_stage('GameComplete')
+		%ShipList.select(0)
+		get_tree().paused = true
 
 
 func exit_pressed():
@@ -44,6 +55,7 @@ func exit_pressed():
 func ship_list_selected(index: int):
 	selected_ship_name = Global.SHIPS.keys()[index]
 	array_ship_id = Global.SHIP_ID.keys()[index]
+	
 	if Global.Player.current_ship == Global.SHIP_ID[array_ship_id]['name']:
 		%Buy.disabled = true
 		flag_for_lock_button = true
@@ -66,8 +78,11 @@ func update_ship_info(_ship_name):
 	if purchased_names.has(_ship_name):
 		%Buy.text = 'Equip'
 	else:
-		%Buy.text = 'Buy ' + str(ship['price'])
-	%ShipPreview.texture = load(ship['texture'])
-	%Info.text = "Rate of Fire: %.2f
+		%Buy.text = 'Buy: ' + str(ship['price'])
 	
-	Mass: %.2f" % [ship['mass'], ship['rate_of_fire']]
+	%ShipPreview.texture = load(ship['texture'])
+	%Info.text = "%s
+	
+	Rate of Fire: %.2f
+	
+	Mass: %.2f" % [ship['info'], ship['mass'], ship['rate_of_fire']]

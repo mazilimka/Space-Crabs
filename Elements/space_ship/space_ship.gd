@@ -9,7 +9,7 @@ extends RigidBody2D
 @onready var space_ship_hud: Control = $SpaceShipHUD
 
 @export var max_health := 0
-@export var health := 100000.0
+@export var health := 200.0
 
 const ACCELERATE : float = 1800 #350.0
 const DECELERATE : float = 50.0
@@ -39,6 +39,10 @@ func _physics_process(delta):
 	if get_contact_count() == 0:
 		set_prev_inertia(linear_velocity.length() * mass)
 	
+	if Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
+		launch_rocked(get_global_mouse_position())
+		timer = 0
+	
 	var _prev_position = global_position
 	
 	var dir_delta = max(0, direction.dot(linear_velocity.normalized()))
@@ -58,7 +62,7 @@ func _physics_process(delta):
 
 	for el in _coll:
 		if el.is_in_group('Enemies') and not collision_lock:
-			damage(randf_range(0, _previous_inertia * 0.30))
+			damage(randf_range(0, _previous_inertia * 0.0015))
 			prints("Collision force", _previous_inertia)
 			collision_lock = true
 			await body_exited
@@ -83,9 +87,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			#launch_rocked(_viewport_pos + event.position)
 			#timer = 0
 	
-	if event is InputEventMouseButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
-		launch_rocked(get_global_mouse_position())
-		timer = 0
+	#if event is InputEventMouseButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
+		#launch_rocked(get_global_mouse_position())
+		#timer = 0
 	
 	if Input.is_joy_known(0):
 		if event is InputEventJoypadButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
@@ -110,13 +114,9 @@ func launch_rocked(_to: Vector2):
 
 func upgrage_ship(_dict: Dictionary, _id: Dictionary):
 	current_ship = _id['name']
-	#max_health = _dict['hp']
-	#health = _dict['hp']
 	mass = _dict['mass']
 	rate_of_fire = _dict['rate_of_fire']
 	%Sprite2D.texture = load(_dict['texture'])
-	#update_max_hp()
-	#update_hp_bar()
 
 
 func update_hp_bar():
@@ -143,5 +143,6 @@ func damage(amount: float):
 
 
 func death():
+	Global.is_space_ship_death = true
 	queue_free()
 	owner.game_over()

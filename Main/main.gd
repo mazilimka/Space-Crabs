@@ -22,14 +22,15 @@ func _ready():
 
 	space_ship.global_position.y = 100
 	$ShipShopArea.global_position = Vector2(randf_range(-7000, 7000), randf_range(-7000, 7000))
+	#$ShipShopArea.global_position = Vector2(100, 100)
 	
-	#Spawner.spawn_asteroids_area()
+	Spawner.spawn_asteroids_area()
+	#Global.set_coin(100)
 	
 	%TimerForComet.wait_time = randf_range(5.0, 10.0)
 	%TimerForComet.start()
 	enemy_outpost()
-	
-	Global.set_coin(100)
+
 
 
 func _physics_process(delta: float) -> void:
@@ -56,7 +57,7 @@ func enemy_outpost():
 
 func game_over():
 	get_tree().paused = true
-	MainHud.death_window.show()
+	MainHud.death_window.open()
 
 
 func run_comet():

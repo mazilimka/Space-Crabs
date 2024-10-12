@@ -12,8 +12,6 @@ var current_stage
 var current_menu = null
 
 func _ready() -> void:
-	
-	
 	change_stage('GameplayHud')
 	Events.score_coin_update.connect(update_coin)
 	%GamePause.toggled.connect(_on_game_pause_toggled)
@@ -22,12 +20,6 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Escape") and Input.is_action_just_pressed("Escape"):
 		_on_game_pause_toggled(true)
-
-
-func _on_restart_scene_pressed() -> void:
-	Global.get_lvl().get_tree().reload_current_scene()
-	death_window.hide()
-	Global.set_coin(0)
 
 
 func update_coin(coin: int):
@@ -49,25 +41,40 @@ func change_stage(_stage: String):
 		'GameplayHud':
 			%GamePause.show()
 			%Score.show()
+			%Score.global_position.x = 13
 			%DebugMenu.visible = Settings.SETTINGS['Cheats']
+			%GameComplete.hide()
 			#%VirtualJoystick.show()
 		'ShipShop':
 			%GamePause.hide()
-			%Score.hide()
+			%Score.show()
+			%Score.global_position.x = 0
 			%DebugMenu.hide()
 			%VirtualJoystick.hide()
+			%GameComplete.hide()
 		'Setting':
 			%GamePause.hide()
 			%Score.hide()
 			%DebugMenu.visible = Settings.SETTINGS['Cheats']
 			%VirtualJoystick.hide()
+			%GameComplete.hide()
 		'DeathWindow':
 			%GamePause.show()
 			%Score.show()
+			%Score.global_position.x = 13
 			%DebugMenu.hide()
 			%VirtualJoystick.hide()
+			%GameComplete.hide()
 		'GreetWindow':
 			%GamePause.hide()
 			%Score.hide()
 			%DebugMenu.hide()
 			%VirtualJoystick.hide()
+			%GameComplete.hide()
+		'GameComplete':
+			%GamePause.hide()
+			%Score.hide()
+			%DebugMenu.hide()
+			%VirtualJoystick.hide()
+			%GameComplete.show()
+			%ShipShop.hide()

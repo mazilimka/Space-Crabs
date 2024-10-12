@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceo3uq15l2fca"]
+
+[ext_resource type="Script" path="res://UI/GameComplete/game_complete.gd" id="1_t2d6y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxyyh"]
+bg_color = Color(0.118835, 0.230469, 0.136278, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="GameComplete" type="Panel"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -129.0
+offset_right = 222.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_fxyyh")
+script = ExtResource("1_t2d6y")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 442.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 39
+text = "The game is complete!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -41.5
+offset_right = 125.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+text = "Start over"
+
+[node name="ContinueFlying" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 44.5
+offset_right = 125.0
+offset_bottom = 104.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+text = "Continue flying"
