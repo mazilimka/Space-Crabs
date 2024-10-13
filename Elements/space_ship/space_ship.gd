@@ -9,14 +9,15 @@ extends RigidBody2D
 @onready var space_ship_hud: Control = $SpaceShipHUD
 
 @export var max_health := 0
-@export var health := 200.0
+@export var health := 200000.0
 
 const ACCELERATE : float = 1800 #350.0
 const DECELERATE : float = 50.0
 const MAX_SPEED : float = 700.0
 
 var rate_of_fire = Global.SHIPS['ship_1']['rate_of_fire']
-var current_ship
+var current_ship = 'ship_1'
+var current_ship_id
 var garbages_spawn_pos
 var direction
 var timer : float = 0.0
@@ -114,6 +115,7 @@ func launch_rocked(_to: Vector2):
 
 func upgrage_ship(_dict: Dictionary, _id: Dictionary):
 	current_ship = _id['name']
+	current_ship_id = _dict['id']
 	mass = _dict['mass']
 	rate_of_fire = _dict['rate_of_fire']
 	%Sprite2D.texture = load(_dict['texture'])

@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var game_pause: TextureButton = %GamePause
 @onready var virtual_joystick: VirtualJoystick = %VirtualJoystick
 @onready var ship_shop: Panel = %ShipShop
+@onready var ship_purchase_not: Label = %ShipPurchaseNot
 
 var current_stage
 var current_menu = null
@@ -34,6 +35,14 @@ func _on_game_pause_toggled(toggled_on: bool) -> void:
 		false:
 			get_tree().paused = false
 			death_window.hide()
+
+
+func launch_ship_purchase_not():
+	ship_purchase_not.show()
+	var tween = create_tween()
+	tween.tween_property(ship_purchase_not, 'modulate', Color('#fe934500'), 8)
+	await tween.finished
+	ship_purchase_not.hide()
 
 
 func change_stage(_stage: String):

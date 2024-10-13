@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdyh467doaoc6"]
 
-[ext_resource type="Script" path="res://UI/main_hud.gd" id="1_mcl21"]
+[ext_resource type="Script" path="res://Main/main_HUD/main_hud.gd" id="1_mcl21"]
 [ext_resource type="PackedScene" uid="uid://txiqrwa1qd6f" path="res://UI/debug_menu.tscn" id="2_sw5b4"]
 [ext_resource type="Texture2D" uid="uid://dcoymcxlfpo4n" path="res://Assets/UI_icon/Pause.png" id="4_h5ayf"]
 [ext_resource type="PackedScene" uid="uid://b4fk84k7nqivt" path="res://UI/DeathWindow/death_window.tscn" id="5_xt22b"]
@@ -62,3 +62,17 @@ visible = false
 [node name="GameComplete" parent="." instance=ExtResource("8_5a20w")]
 unique_name_in_owner = true
 visible = false
+
+[node name="ShipPurchaseNot" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.996078, 0.576471, 0.270588, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "You can buy the next ship in the Ship Store!"

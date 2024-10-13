@@ -10,7 +10,7 @@ extends Node2D
 
 var coin
 var distance_to_coin
-var coin_spawn_radius : float = 8000.0
+var coin_spawn_radius : float = 1000.0
 var planet_radius_by_spawn : float = 8500.0
 var last_spawned_coin
 
@@ -24,13 +24,12 @@ func _ready():
 	$ShipShopArea.global_position = Vector2(randf_range(-7000, 7000), randf_range(-7000, 7000))
 	#$ShipShopArea.global_position = Vector2(100, 100)
 	
-	Spawner.spawn_asteroids_area()
+	#Spawner.spawn_asteroids_area()
 	#Global.set_coin(100)
 	
 	%TimerForComet.wait_time = randf_range(5.0, 10.0)
 	%TimerForComet.start()
 	enemy_outpost()
-
 
 
 func _physics_process(delta: float) -> void:
@@ -48,7 +47,6 @@ func enemy_outpost():
 	coin = Spawner.spawn_coin(Geometry.get_rand_vec(coin_spawn_radius))
 	if Spawner.lvl_counter <= 4:
 		Spawner.spawn_enemy(coin.global_position, Spawner.lvl_counter)
-		Spawner.enemy_kill_counter_only += 1
 	elif Spawner.lvl_counter > 4:
 		for i in randi_range(1, 4):
 			Spawner.spawn_enemy(coin.global_position, randi_range(1, 4))

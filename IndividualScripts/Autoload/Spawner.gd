@@ -18,9 +18,9 @@ var GARBAGES := [
 ]
 
 var enemy_scenes : Dictionary = {
-	1: load("res://Elements/Enemies/DefaultEnemy/enemy.tscn"),
-	2: load('res://Elements/Enemies/OrbitEnemy/orbit_enemies.tscn'),
-	3: load('res://Elements/Enemies/SquareEnemy/square_enemy.tscn'),
+	1: load('res://Elements/Enemies/DefaultEnemy/enemy.tscn'),
+	2: load("res://Elements/Enemies/OrbitEnemy/orbit_enemy.tscn"),
+	3: load("res://Elements/Enemies/SquareEnemy/square_enemy.tscn"),
 	4: load("res://Elements/Enemies/TringularEnemy/tringular_enemy.tscn")
 }
 
@@ -35,7 +35,6 @@ var POOL_POINTER = 0
 var coin_scene : PackedScene = load("res://Elements/Coin/coin.tscn")
 var asteroids_group_scene := load("res://Elements/Environments/AsteroidsGroup/asteroids_group.tscn")
 
-var enemy_kill_counter_only: int = 1
 var lvl_counter: int = 1
 var garbage_instance
 var coin_position
@@ -54,9 +53,16 @@ func _ready() -> void:
 	spawn_planets()
 
 
+
+func delete_all_object():
+	for i in get_children():
+		queue_free()
+	return true
+
+
 func spawn_coin(_pos: Vector2):
 	coin_instant = coin_scene.instantiate()
-	add_child(coin_instant, true)
+	get_tree().current_scene.add_child(coin_instant, true)
 	coin_position = _pos
 	coin_instant.global_position = coin_position
 	Global.update_coin_position(coin_position)
@@ -65,8 +71,8 @@ func spawn_coin(_pos: Vector2):
 
 
 func spawn_enemy(_pos: Vector2, _enemy_type: int = 1):
-	var enemy_instant: Node2D = enemy_scenes[_enemy_type].instantiate()
-	add_child(enemy_instant, true)
+	var enemy_instant : Node2D = enemy_scenes[_enemy_type].instantiate()
+	get_tree().current_scene.add_child(enemy_instant, true)
 	enemy_instant.global_position = _pos
 	return enemy_instant
 
@@ -92,7 +98,7 @@ func run_garbage():
 	if garbage_instance.get_parent():
 		garbage_instance.reparent(self)
 	else:
-		add_child(garbage_instance, true)
+		get_tree().current_scene.add_child(garbage_instance, true)
 
 
 func spawn_planets():
@@ -109,7 +115,7 @@ func spawn_planets():
 			var radius = planet_instance.radius
 			
 			if is_planet_position_empty(new_pos, radius + additional_radius_between_planets):
-				add_child(planet_instance, true)
+				get_tree().current_scene.add_child(planet_instance, true)
 				planet_instance.global_position = new_pos
 				
 				planets_positions += [{"position": new_pos, 'radius': radius}]
@@ -141,7 +147,7 @@ func spawn_asteroids_area():
 			var area_scene_radius = asteroids_group_instance.radius
 			
 			if is_asteroids_group_position_empty(new_position, 1000 + area_scene_radius):
-				add_child(asteroids_group_instance, true)
+				get_tree().current_scene.add_child(asteroids_group_instance, true)
 				asteroids_group_instance.global_position = new_position
 				occupied_asteroid_areas_pos = [{'position': new_position, 'radius': area_scene_radius}]
 				asteroids_group_instance = null

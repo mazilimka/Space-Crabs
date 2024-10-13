@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://73n85pceyluo"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_pxe4o"]
+[ext_resource type="Script" path="res://Elements/Enemies/TringularEnemy/trigular_enemy.gd" id="1_le4o0"]
 [ext_resource type="Texture2D" uid="uid://dbrkdlg0ghvtc" path="res://Assets/godot-invader-small.png" id="2_5wqe5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
@@ -79,8 +79,7 @@ scale = Vector2(3, 3)
 collision_layer = 8
 collision_mask = 10
 slide_on_ceiling = false
-script = ExtResource("1_pxe4o")
-rate_of_fire = 0.15
+script = ExtResource("1_le4o0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TringularEnemy"]
 shape = SubResource("CapsuleShape2D_1vakt")

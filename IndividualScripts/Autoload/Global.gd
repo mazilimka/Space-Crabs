@@ -2,6 +2,8 @@ extends Node
 
 @onready var coin_scene := preload("res://Elements/Coin/coin.tscn").instantiate()
 
+var next_ship_id := 1
+var purchased_ships_counter: = 1
 var is_restart_game := false
 var is_continue_game := false
 var is_space_ship_death := false
@@ -23,6 +25,8 @@ var SHIPS : Dictionary = {
 	"ship_1" = {
 		"id" = 
 			1,
+		'needs_lvl' = 
+			0,
 		'hp' = 
 			100,
 		'rate_of_fire' =
@@ -39,6 +43,8 @@ var SHIPS : Dictionary = {
 	"ship_2" = {
 		"id" = 
 			2,
+		'needs_lvl' = 
+			1,
 		'hp' = 
 			120,
 		'rate_of_fire' =
@@ -48,13 +54,15 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			1.7,
 		'price' = 
-			2,
+			1,
 		'info' = 
 			'The rate of fire and maneuverability are better'
 	},
 	'ship_3' = {
 		"id" = 
 			3,
+		'needs_lvl' = 
+			2,
 		'hp' = 
 			140,
 		'rate_of_fire' =
@@ -64,13 +72,15 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			1.4,
 		'price' = 
-			3,
+			1,
 		'info' =
 			'The rate of fire and maneuverability have become even better'
 	},
 	'ship_4' = {
 		"id" = 
 			4,
+		'needs_lvl' = 
+			3,
 		'hp' = 
 			160,
 		'rate_of_fire' =
@@ -80,13 +90,15 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			1.0,
 		'price' =
-			 6,
+			 2,
 		'info' = 
 			'The rate of fire has improved'
 	},
 	'ship_5' = {
 		"id" = 
 			5,
+		'needs_lvl' = 
+			4,
 		'hp' = 
 			170,
 		'rate_of_fire' =
@@ -96,13 +108,15 @@ var SHIPS : Dictionary = {
 		'mass' = 
 			0.5,
 		'price' = 
-			7,
+			3,
 		'info' = 
 			'Maneuverability is behaving strangely...'
 	},
 	'ship_6' = {
 		"id" = 
 			6,
+		'needs_lvl' = 
+			5,
 		'hp' = 
 			10000,
 		'rate_of_fire' =
@@ -112,7 +126,7 @@ var SHIPS : Dictionary = {
 		'mass' =
 			0.25,
 		'price' =
-			 11,
+			5,
 		'info' = 
 			'What for?'
 	}
@@ -154,6 +168,8 @@ func _on_player_exit():
 func add_coin():
 	score += 1
 	Events.score_coin_update.emit(score)
+	if score == SHIPS.get('ship_' + str(next_ship_id))['price']:
+		MainHud.launch_ship_purchase_not()
 
 
 func set_coin(value):

@@ -39,6 +39,9 @@ func _on_restart_game_pressed():
 	Global.PURCHASED_SHIP.append(Global.SHIP_ID['id_1']['name'])
 	Global.is_restart_game = true
 	Global.is_continue_game = false
+	Spawner.lvl_counter = 1
+	Global.next_ship_id = 1
+	#Spawner.delete_all_object()
 	
 	get_tree().paused = false
 	Global.get_lvl().get_tree().reload_current_scene()

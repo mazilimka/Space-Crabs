@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ilnyj6dlug1j"]
 
-[ext_resource type="Script" path="res://Elements/Enemies/OrbitEnemy/enemy.gd" id="1_p3twg"]
+[ext_resource type="Script" path="res://Elements/Enemies/OrbitEnemy/orbit_enemy.gd" id="1_p3twg"]
 [ext_resource type="Texture2D" uid="uid://dbrkdlg0ghvtc" path="res://Assets/godot-invader-small.png" id="2_3ypfk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
@@ -79,7 +79,7 @@ collision_layer = 8
 collision_mask = 10
 slide_on_ceiling = false
 script = ExtResource("1_p3twg")
-rate_of_fire = 0.25
+rate_of_fire = 0.3
 health = 115
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OrbitEnemy"]

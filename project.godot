@@ -29,7 +29,6 @@ Spawner="*res://IndividualScripts/Autoload/Spawner.gd"
 
 [display]
 
-window/size/mode=3
 window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"

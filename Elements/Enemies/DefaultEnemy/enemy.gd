@@ -6,7 +6,7 @@ class_name Enemy
 @onready var enemy_rocked_scene := preload('res://Elements/Bullet/Rocked/rocked.tscn')
 @onready var timer_before_shot : Timer = $TimerBeforeShot
 
-@export var rate_of_fire := 0.30
+@export var rate_of_fire := 0.0
 @export var health := 100
 @export var attack_area_node : Area2D
 @export var using_tween : bool = true
