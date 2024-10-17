@@ -141,6 +141,18 @@ func delete_array_ship():
 	PURCHASED_SHIP.clear()
 
 
+func global_restart():
+	is_space_ship_death = false
+	delete_array_ship()
+	PURCHASED_SHIP.append(Global.SHIP_ID['id_1']['name'])
+	is_restart_game = true
+	is_continue_game = false
+	next_ship_id = 1
+	Spawner.lvl_counter = 1
+	get_lvl().get_tree().reload_current_scene()
+	set_coin(0)
+
+
 func greet_win_run():
 	get_tree().change_scene_to_file("res://Hi/hi.tscn")
 	MainHud.change_stage('GreetWindow')
@@ -169,7 +181,7 @@ func add_coin():
 	score += 1
 	Events.score_coin_update.emit(score)
 	if score == SHIPS.get('ship_' + str(next_ship_id))['price']:
-		MainHud.launch_ship_purchase_not()
+		MainHud.launch_ship_purchase_notif()
 
 
 func set_coin(value):

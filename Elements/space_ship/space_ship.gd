@@ -23,6 +23,7 @@ var direction
 var timer : float = 0.0
 var collision_lock = false
 var collided_bodies = []
+var _previous_inertia = inertia
 
 func _ready():
 	upgrage_ship(Global.SHIPS['ship_1'], Global.SHIP_ID['id_1'])
@@ -31,8 +32,6 @@ func _ready():
 	contact_monitor = true
 	max_contacts_reported = 5
 
-var _previous_inertia = inertia
-
 
 func _physics_process(delta):
 	direction = Input.get_vector('left', "right", "up", "down")
@@ -40,9 +39,7 @@ func _physics_process(delta):
 	if get_contact_count() == 0:
 		set_prev_inertia(linear_velocity.length() * mass)
 	
-	if Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
-		launch_rocked(get_global_mouse_position())
-		timer = 0
+	
 	
 	var _prev_position = global_position
 	
@@ -79,24 +76,42 @@ func _unhandled_input(event: InputEvent) -> void:
 	var camera_pos = get_viewport().get_camera_2d().get_target_position()
 	var _viewport_pos = camera_pos - (_rect.size / 2)
 	
-	#if event is InputEventScreenTouch and (timer >= rate_of_fire):
+	if OS.has_feature("windows"):
+		if Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
+			launch_rocked(get_global_mouse_position())
+			timer = 0
+	
+	if event is InputEventScreenTouch and (timer >= rate_of_fire) and event.is_pressed():
+		print(event.pressed)
+		launch_rocked(_viewport_pos + event.position)
+		print("Запуск ракеты")
+		print_stack()
+		prints("В кадре ", Engine.get_frames_drawn())
+		timer = 0
+	
+	#if event.is_pressed() and (timer >= rate_of_fire):
 		#launch_rocked(_viewport_pos + event.position)
 		#timer = 0
-	#
-	#if event is InputEventScreenDrag and (timer >= rate_of_fire):
+	
+	#if event is InputEventScreenTouch and (timer >= rate_of_fire):
 		#if timer != 0:
 			#launch_rocked(_viewport_pos + event.position)
 			#timer = 0
 	
-	#if event is InputEventMouseButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
-		#launch_rocked(get_global_mouse_position())
-		#timer = 0
+	if event is InputEventScreenDrag and (timer >= rate_of_fire):
+		if timer != 0:
+			launch_rocked(_viewport_pos + event.position)
+			timer = 0
+
 	
 	if Input.is_joy_known(0):
 		if event is InputEventJoypadButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
 			var axis_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 			var axis_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 			launch_rocked(Vector2(axis_x, axis_y))
+			print("Инпут ракеты с гейпада")
+			print_stack()
+			prints("В кадре ", Engine.get_frames_drawn())
 			timer = 0
 
 

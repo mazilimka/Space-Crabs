@@ -1,7 +1,4 @@
-extends "res://Main/main.gd"
-
-func _ready() -> void:
-	pass
+extends Node2D
 
 
 func _unhandled_input(event: InputEvent) -> void:

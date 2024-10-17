@@ -57,7 +57,6 @@ visible = false
 
 [node name="VirtualJoystick" parent="." instance=ExtResource("7_yyrso")]
 unique_name_in_owner = true
-visible = false
 
 [node name="GameComplete" parent="." instance=ExtResource("8_5a20w")]
 unique_name_in_owner = true

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://TestScenes/TESTMAIN/testmain.gd" id="1_yqh0q"]
 [ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="2_xf04m"]
 [ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="3_t3doi"]
-[ext_resource type="PackedScene" uid="uid://b5j887djsiwyi" path="res://Main/CursorVisibleOnControlPressed/cursor_visible_on_control_pressed.tscn" id="4_wlcs7"]
 [ext_resource type="PackedScene" uid="uid://bwkoh44m6b283" path="res://TestScenes/TEST_ENEMY/test_enemy.tscn" id="5_8dc2j"]
+[ext_resource type="Script" path="res://Elements/Enemies/DefaultEnemy/default_enemy.gd" id="5_mr2k4"]
 [ext_resource type="PackedScene" uid="uid://dridblvhpbjwi" path="res://Elements/Environments/Garbages/BasicGarbage/basic_garbage.tscn" id="11_6a1d3"]
 [ext_resource type="PackedScene" uid="uid://bf8a4fk3t8obj" path="res://Elements/Environments/Garbages/1_Garbage/1_garbage.tscn" id="12_pp6ei"]
 [ext_resource type="PackedScene" uid="uid://cywnk0lbe1pe6" path="res://Elements/Environments/Garbages/2_Garbage/2_garbage.tscn" id="13_whjmo"]
@@ -66,23 +66,25 @@ position_smoothing_speed = 7.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="CursorVisibleOnControlPressed" parent="." instance=ExtResource("4_wlcs7")]
-
 [node name="Test Enemies" type="Node2D" parent="."]
 visible = false
 z_index = 1
 
 [node name="TestEnemy" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(-5591, 5502)
+script = ExtResource("5_mr2k4")
 
 [node name="TestEnemy2" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(-3152, 2200)
+script = ExtResource("5_mr2k4")
 
 [node name="TestEnemy4" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(1902, -2676)
+script = ExtResource("5_mr2k4")
 
 [node name="TestEnemy5" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(3807, -4581)
+script = ExtResource("5_mr2k4")
 
 [node name="TestGarbages" type="Node2D" parent="."]
 
