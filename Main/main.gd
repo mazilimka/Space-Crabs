@@ -2,9 +2,10 @@ extends Node2D
 
 @onready var timer_for_garbage: Timer = %TimerForGarbage
 @onready var comet_scene : PackedScene = load("res://Elements/BackgroundEffects/CometEffects/comet_effect.tscn")
+#TODO: не используется
 @onready var space_ship_scene : PackedScene = load("res://Elements/space_ship/space_ship.tscn")
-@onready var space_ship: RigidBody2D = %SpaceShip
-@onready var start: Label = %Start
+@onready var space_ship: RigidBody2D = %SpaceShip #TODO: ненадежная ссылка
+@onready var start: Label = %Start #TODO: не используется
 @onready var camera = %Camera2D
 @onready var ship_shop_area: Node2D = $ShipShopArea
 
@@ -16,8 +17,11 @@ var last_spawned_coin
 
 
 func _ready():
+	#TODO: мусор и эффекты с ростом класса можно вынести в отдельный класс
 	timer_for_garbage.timeout.connect(_on_timer_for_garbage_timeout)
 	%TimerForComet.timeout.connect(_on_timer_for_comet_timeout)
+	
+	#TODO: можно выделить зацикливание сигналов в отдельные методы геймлупа
 	Events.coin_pickup.connect(enemy_outpost)
 
 	space_ship.global_position.y = 100
@@ -32,8 +36,10 @@ func _ready():
 	enemy_outpost()
 
 
-func _physics_process(delta: float) -> void:
-	distance_to_coin = Spawner.coin_position.distance_to(space_ship.global_position)
+
+#func _physics_process(delta: float) -> void:
+	##TODO: прибито гвоздями
+	#distance_to_coin = Spawner.coin_position.distance_to(Global.Player.global_position)
 
 
 func set_camera_remote_transform(_r_transform: RemoteTransform2D):

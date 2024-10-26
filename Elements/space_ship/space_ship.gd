@@ -163,3 +163,7 @@ func death():
 	Global.is_space_ship_death = true
 	queue_free()
 	owner.game_over()
+
+
+func get_component(comp_name : String ):
+	return get_node_or_null(comp_name)

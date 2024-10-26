@@ -1,9 +1,12 @@
 extends Node
 
+#TODO: не используется
 @onready var coin_scene := preload("res://Elements/Coin/coin.tscn").instantiate()
 
 var next_ship_id := 1
 var purchased_ships_counter: = 1
+#TODO: намекает на создание машины состояний
+#TODO: области ответственности перемешаны
 var is_restart_game := false
 var is_continue_game := false
 var is_space_ship_death := false
@@ -191,3 +194,8 @@ func set_coin(value):
 
 func update_coin_position(new_position: Vector2):
 	coin_position = new_position
+
+
+#желательно в отдельном классе
+func get_component(_node: Node, comp_name : String ):
+	return _node.get_node_or_null(comp_name)

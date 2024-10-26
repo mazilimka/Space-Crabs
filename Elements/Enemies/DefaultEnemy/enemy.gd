@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @onready var progress_bar : ProgressBar = $HPBar/ProgressBar
+#TODO: вынести в отдельный класс спавнера проджектайлов
 @onready var enemy_rocked_scene := preload('res://Elements/Bullet/Rocked/rocked.tscn')
 @onready var timer_before_shot : Timer = $TimerBeforeShot
 
@@ -33,7 +34,7 @@ func tween_moving():
 	tween.tween_property(self, 'global_position:x', start_position, 2)
 	tween.set_loops()
 
-
+#TODO: вынести в компонент урона
 func damage(amount: float):
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, 'modulate', Color.BLACK, 0.15)
@@ -62,7 +63,7 @@ func launch_enemy_rocked():
 	enemy_rocked_instant.global_position = global_position
 	enemy_rocked_instant.set_direction((Global.Player.global_position - global_position).normalized(), self, ['Enemies'])
 
-
+#TODO: при усложнении можно вынести в машину состояний
 func _on_area_2d_body_entered(body):
 	if body.is_in_group('Player'):
 		timer_before_shot.start()

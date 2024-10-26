@@ -9,7 +9,7 @@ extends CanvasLayer
 @onready var ship_shop: Panel = %ShipShop
 @onready var ship_purchase_not: Label = %ShipPurchaseNot
 
-var current_stage
+var current_stage #TODO: не используется
 var current_menu = null
 
 func _ready() -> void:
@@ -44,7 +44,7 @@ func launch_ship_purchase_notif():
 	await tween.finished
 	ship_purchase_not.hide()
 
-
+#TODO: переделать
 func change_stage(_stage: String):
 	match _stage:
 		'GameplayHud':

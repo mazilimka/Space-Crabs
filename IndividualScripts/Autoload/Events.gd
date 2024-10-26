@@ -1,5 +1,6 @@
 extends Node
 
+#TODO: лучше объяснить разницу шины событий и отдельного ивента конкретного объекта
 signal score_coin_update(coin: int)
 signal coin_collected
 signal coin_pickup

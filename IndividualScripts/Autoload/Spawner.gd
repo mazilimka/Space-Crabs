@@ -80,7 +80,7 @@ func spawn_enemy(_pos: Vector2, _enemy_type: int = 1):
 func spawn_enemy_group(_pos: Vector2):
 	pass
 
-
+#TODO: выделить пул в отдельный объект
 func setup_pool(_max_size):
 	POOL_MAX_SIZE = _max_size
 	for el in _max_size:
@@ -100,7 +100,7 @@ func run_garbage():
 	else:
 		get_tree().current_scene.add_child(garbage_instance, true)
 
-
+#TODO: уменьшить вложенность
 func spawn_planets():
 	var planets_count = randi_range(5, 15)
 	for planet_num in range(planets_count):
@@ -131,7 +131,7 @@ func is_planet_position_empty(pos: Vector2, radius1: float) -> bool:
 			return false
 	return true
 
-
+#TODO: уменьшить вложенность
 func spawn_asteroids_area():
 	var timeout := 500
 	var new_position

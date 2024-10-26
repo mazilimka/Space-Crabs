@@ -10,7 +10,7 @@ func _ready() -> void:
 	Events.distance_to_coin.connect(distance_to_coin_hide)
 	Events.distance_to_start.connect(distance_to_start_hide)
 
-
+#TODO: можно обновлять на item_rect_changed() корабля
 func _process(delta: float) -> void:
 	if not Global.Player:
 		return

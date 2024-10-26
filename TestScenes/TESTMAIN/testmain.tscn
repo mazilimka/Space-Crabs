@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://b7jbbmjiwp4uc"]
+[gd_scene load_steps=19 format=3 uid="uid://b7jbbmjiwp4uc"]
 
 [ext_resource type="Script" path="res://TestScenes/TESTMAIN/testmain.gd" id="1_yqh0q"]
+[ext_resource type="Texture2D" uid="uid://db0o4b7vggn4k" path="res://Assets/Simple Shapes/Circle.png" id="2_sxaag"]
 [ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="2_xf04m"]
+[ext_resource type="Script" path="res://components/health.gd" id="3_mlt3s"]
 [ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="3_t3doi"]
+[ext_resource type="Script" path="res://components/damage_controler.gd" id="4_bsff0"]
+[ext_resource type="Script" path="res://components/damage_area.gd" id="5_2y7fh"]
 [ext_resource type="PackedScene" uid="uid://bwkoh44m6b283" path="res://TestScenes/TEST_ENEMY/test_enemy.tscn" id="5_8dc2j"]
-[ext_resource type="Script" path="res://Elements/Enemies/DefaultEnemy/default_enemy.gd" id="5_mr2k4"]
+[ext_resource type="Script" path="res://Elements/Enemies/DefaultEnemy/enemy.gd" id="5_cdjib"]
 [ext_resource type="PackedScene" uid="uid://dridblvhpbjwi" path="res://Elements/Environments/Garbages/BasicGarbage/basic_garbage.tscn" id="11_6a1d3"]
 [ext_resource type="PackedScene" uid="uid://bf8a4fk3t8obj" path="res://Elements/Environments/Garbages/1_Garbage/1_garbage.tscn" id="12_pp6ei"]
 [ext_resource type="PackedScene" uid="uid://cywnk0lbe1pe6" path="res://Elements/Environments/Garbages/2_Garbage/2_garbage.tscn" id="13_whjmo"]
@@ -12,9 +16,59 @@
 [ext_resource type="PackedScene" uid="uid://ckac76siqic04" path="res://Elements/Environments/Garbages/5_Garbage/5_garbage.tscn" id="16_1k6yo"]
 [ext_resource type="PackedScene" uid="uid://vgew1idfwwqk" path="res://Elements/Environments/Garbages/8_Garbage/8_garbage.tscn" id="19_0cax3"]
 
+[sub_resource type="GDScript" id="GDScript_wyxn4"]
+script/source = "extends Node
+"
+
+[sub_resource type="GDScript" id="GDScript_mnvq3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nic8l"]
+radius = 16.0
+
 [node name="TESTMAIN" type="Node2D"]
 z_index = -1
 script = ExtResource("1_yqh0q")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Enemies"]]
+position = Vector2(168, -83)
+collision_layer = 8
+script = SubResource("GDScript_wyxn4")
+
+[node name="Target" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.0625, 0.0625)
+texture = ExtResource("2_sxaag")
+script = SubResource("GDScript_mnvq3")
+
+[node name="HealthComponent" type="Node" parent="StaticBody2D"]
+script = ExtResource("3_mlt3s")
+
+[node name="DamageControlerComponent" type="Node2D" parent="StaticBody2D"]
+script = ExtResource("4_bsff0")
+
+[node name="DamageAreaComponent" type="Area2D" parent="StaticBody2D/DamageControlerComponent" groups=["Enemies"]]
+position = Vector2(-39, -27)
+collision_layer = 8
+script = ExtResource("5_2y7fh")
+damage_mult = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/DamageControlerComponent/DamageAreaComponent"]
+shape = SubResource("CircleShape2D_nic8l")
+
+[node name="DamageAreaComponent2" type="Area2D" parent="StaticBody2D/DamageControlerComponent" groups=["Enemies"]]
+collision_layer = 8
+script = ExtResource("5_2y7fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/DamageControlerComponent/DamageAreaComponent2"]
+shape = SubResource("CircleShape2D_nic8l")
+
+[node name="DamageAreaComponent3" type="Area2D" parent="StaticBody2D/DamageControlerComponent" groups=["Enemies"]]
+position = Vector2(45, 29)
+collision_layer = 8
+script = ExtResource("5_2y7fh")
+damage_mult = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/DamageControlerComponent/DamageAreaComponent3"]
+shape = SubResource("CircleShape2D_nic8l")
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -1
@@ -52,6 +106,7 @@ grow_vertical = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 30
 text = "Start"
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -72,19 +127,19 @@ z_index = 1
 
 [node name="TestEnemy" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(-5591, 5502)
-script = ExtResource("5_mr2k4")
+script = ExtResource("5_cdjib")
 
 [node name="TestEnemy2" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(-3152, 2200)
-script = ExtResource("5_mr2k4")
+script = ExtResource("5_cdjib")
 
 [node name="TestEnemy4" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(1902, -2676)
-script = ExtResource("5_mr2k4")
+script = ExtResource("5_cdjib")
 
 [node name="TestEnemy5" parent="Test Enemies" instance=ExtResource("5_8dc2j")]
 position = Vector2(3807, -4581)
-script = ExtResource("5_mr2k4")
+script = ExtResource("5_cdjib")
 
 [node name="TestGarbages" type="Node2D" parent="."]
 
