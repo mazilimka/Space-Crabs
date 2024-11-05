@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://curmlty52e1nw"]
+[gd_scene load_steps=12 format=3 uid="uid://curmlty52e1nw"]
 
-[ext_resource type="Script" path="res://Elements/Enemies/DefaultEnemy/default_enemy.gd" id="1_nsgom"]
+[ext_resource type="Script" path="res://Elements/Enemies/DefaultEnemy/enemy.gd" id="1_j7gth"]
 [ext_resource type="Texture2D" uid="uid://dbrkdlg0ghvtc" path="res://Assets/godot-invader-small.png" id="2_r26es"]
+[ext_resource type="Script" path="res://components/damage_controler.gd" id="3_cbnif"]
+[ext_resource type="Script" path="res://components/damage_area.gd" id="4_jsx5t"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="5_iaygr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
-radius = 9.0
-height = 18.0
+radius = 8.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4gifs"]
 atlas = ExtResource("2_r26es")
@@ -32,14 +35,16 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_dcuh1"]
 radius = 320.0
 
-[node name="Enemy" type="CharacterBody2D" groups=["Enemies"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sw2v2"]
+radius = 7.33333
+
+[node name="Enemy" type="CharacterBody2D" groups=["coll_with_player"]]
 z_index = 4
 scale = Vector2(3, 3)
 collision_layer = 8
-collision_mask = 10
+collision_mask = 2
 slide_on_ceiling = false
-script = ExtResource("1_nsgom")
-rate_of_fire = 0.5
+script = ExtResource("1_j7gth")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1vakt")
@@ -48,6 +53,9 @@ shape = SubResource("CapsuleShape2D_1vakt")
 sprite_frames = SubResource("SpriteFrames_4wxjh")
 autoplay = "default"
 frame_progress = 0.926814
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("5_iaygr")
 
 [node name="HPBar" type="Control" parent="."]
 layout_mode = 3
@@ -66,12 +74,24 @@ scale = Vector2(0.125, 0.125)
 theme_override_font_sizes/font_size = 11
 value = 100.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="PlayerDetection" type="Area2D" parent="." groups=["Enemies"]]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Enemies"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource("CircleShape2D_dcuh1")
 
 [node name="TimerBeforeShot" type="Timer" parent="."]
 process_callback = 0
+
+[node name="DamageControlerComponent" type="Node2D" parent="."]
+script = ExtResource("3_cbnif")
+
+[node name="DamageAreaComponent" type="Area2D" parent="DamageControlerComponent" groups=["Enemies"]]
+unique_name_in_owner = true
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("4_jsx5t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageControlerComponent/DamageAreaComponent"]
+shape = SubResource("CircleShape2D_sw2v2")

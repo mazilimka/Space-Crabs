@@ -13,10 +13,10 @@ var current_stage #TODO: не используется
 var current_menu = null
 
 func _ready() -> void:
-	#if OS.get_name() == 'Android' or OS.get_name() == 'iOS':
-		#%VirtualJoystick.show()
-	#else:
-		#%VirtualJoystick.hide()
+	if OS.get_name() == 'Android' or OS.get_name() == 'iOS':
+		%VirtualJoystick.show()
+	else:
+		%VirtualJoystick.hide()
 	
 	change_stage('GameplayHud')
 	Events.score_coin_update.connect(update_coin)

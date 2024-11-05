@@ -38,7 +38,7 @@ height = 14.0
 
 [node name="Rocked" type="Area2D"]
 collision_layer = 16
-collision_mask = 74
+collision_mask = 193
 script = ExtResource("1_qar5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -56,6 +56,3 @@ shape = SubResource("CapsuleShape2D_s5bxc")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-1.5, -0.5)
 scale = Vector2(0.75, 0.25)
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

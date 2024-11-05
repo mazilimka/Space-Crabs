@@ -1,8 +1,5 @@
 extends Node
 
-#TODO: не используется
-@onready var coin_scene := preload("res://Elements/Coin/coin.tscn").instantiate()
-
 var next_ship_id := 1
 var purchased_ships_counter: = 1
 #TODO: намекает на создание машины состояний
@@ -13,8 +10,9 @@ var is_space_ship_death := false
 var score : int = 0
 var coin_position := Vector2()
 var window_is_active := false
-var Player: Node2D
 var PURCHASED_SHIP = []
+
+var Player: Node2D
 
 var SHIP_ID := {
 	'id_1' = {'name' = 'ship_1'},
@@ -140,6 +138,11 @@ var SHIPS : Dictionary = {
 	#greet_win_run()
 
 
+#func _process(delta: float) -> void:
+	#if Player != get_node('res://Elements/space_ship/space_ship.tscn'):
+		#breakpoint
+
+
 func delete_array_ship():
 	PURCHASED_SHIP.clear()
 
@@ -151,7 +154,7 @@ func global_restart():
 	is_restart_game = true
 	is_continue_game = false
 	next_ship_id = 1
-	Spawner.lvl_counter = 1
+	#Spawner.lvl_counter = 1
 	get_lvl().get_tree().reload_current_scene()
 	set_coin(0)
 
@@ -197,5 +200,5 @@ func update_coin_position(new_position: Vector2):
 
 
 #желательно в отдельном классе
-func get_component(_node: Node, comp_name : String ):
+func get_component(_node: Node, comp_name: String):
 	return _node.get_node_or_null(comp_name)

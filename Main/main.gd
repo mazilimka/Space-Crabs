@@ -70,6 +70,7 @@ func run_comet():
 
 
 func set_wait_time():
+	return
 	if distance_to_coin >= 5000.0:
 		timer_for_garbage.wait_time = randf_range(1, 3)
 	elif distance_to_coin < 5000.0 and distance_to_coin > 800.0:

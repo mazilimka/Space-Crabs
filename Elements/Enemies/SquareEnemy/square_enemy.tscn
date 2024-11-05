@@ -71,6 +71,7 @@ _data = {
 }
 
 [node name="SquareEnemy" type="Node2D"]
+script = ExtResource("1_x2jte")
 
 [node name="SquareEnemy" type="CharacterBody2D" parent="." groups=["Enemies"]]
 z_index = 4

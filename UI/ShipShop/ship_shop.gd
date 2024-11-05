@@ -13,10 +13,6 @@ func _ready() -> void:
 	%Exit.pressed.connect(exit_pressed)
 
 
-func _process(_delta: float) -> void:
-	pass
-
-
 func open():
 	get_tree().paused = true
 	MainHud.change_stage('ShipShop')

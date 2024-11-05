@@ -15,14 +15,15 @@ func set_health(value: float):
 	pass
 
 func damage(dmg : float):
-	set_health( health - dmg)
+	set_health(health - dmg)
 	damaged.emit()
 	pass
 
 func heal(amount: float):
-	set_health( health + amount)
+	set_health(health + amount)
 	pass
 
 func death():
+	print(get_parent())
 	get_parent().queue_free()
 	pass

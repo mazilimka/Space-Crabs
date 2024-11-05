@@ -1,18 +1,20 @@
 @icon("res://Assets/godot-invader-small.png")
 extends CharacterBody2D
-class_name Enemy
 
 @onready var progress_bar : ProgressBar = $HPBar/ProgressBar
 #TODO: вынести в отдельный класс спавнера проджектайлов
 @onready var enemy_rocked_scene := preload('res://Elements/Bullet/Rocked/rocked.tscn')
 @onready var timer_before_shot : Timer = $TimerBeforeShot
+@onready var damage_area_comp: DamageAreaComponent = %DamageAreaComponent
+@onready var health_comp: HealthComponent = $HealthComponent
 
 @export var rate_of_fire := 0.0
-@export var health := 100
 @export var attack_area_node : Area2D
 @export var using_tween : bool = true
 
+
 func _ready():
+	health_comp.damaged.connect(damaged)
 	timer_before_shot.timeout.connect(launch_enemy_rocked)
 	timer_before_shot.wait_time = rate_of_fire
 	
@@ -20,8 +22,8 @@ func _ready():
 		attack_area_node.body_entered.connect(_on_area_2d_body_entered)
 		attack_area_node.body_exited.connect(_on_area_2d_body_exited)
 	else:
-		$Area2D.body_entered.connect(_on_area_2d_body_entered)
-		$Area2D.body_exited.connect(_on_area_2d_body_exited)
+		$PlayerDetection.body_entered.connect(_on_area_2d_body_entered)
+		$PlayerDetection.body_exited.connect(_on_area_2d_body_exited)
 
 
 func tween_moving():
@@ -34,25 +36,17 @@ func tween_moving():
 	tween.tween_property(self, 'global_position:x', start_position, 2)
 	tween.set_loops()
 
-#TODO: вынести в компонент урона
-func damage(amount: float):
+
+func damaged():
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, 'modulate', Color.BLACK, 0.15)
 	tween.tween_property($AnimatedSprite2D, 'modulate', Color.WHITE, 0.15)
 	
-	health -= amount
 	update_health_bar()
-	if health <= 0:
-		death()
 
 
 func update_health_bar():
-	progress_bar.value = health
-
-
-func death():
-	#Spawner.lvl_counter += 1
-	queue_free()
+	progress_bar.value = health_comp.health
 
 
 func launch_enemy_rocked():
@@ -62,6 +56,7 @@ func launch_enemy_rocked():
 	
 	enemy_rocked_instant.global_position = global_position
 	enemy_rocked_instant.set_direction((Global.Player.global_position - global_position).normalized(), self, ['Enemies'])
+
 
 #TODO: при усложнении можно вынести в машину состояний
 func _on_area_2d_body_entered(body):

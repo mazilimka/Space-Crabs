@@ -1,1 +1,1 @@
-extends Enemy
+extends 'res://Elements/Enemies/DefaultEnemy/enemy.gd'

@@ -70,6 +70,7 @@ _data = {
 }
 
 [node name="OrbitEnemies" type="Node2D"]
+script = ExtResource("1_p3twg")
 
 [node name="OrbitEnemy" type="CharacterBody2D" parent="." groups=["Enemies"]]
 z_index = 4

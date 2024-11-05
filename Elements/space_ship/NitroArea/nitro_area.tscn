@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxq21fjgyps8k"]
+
+[ext_resource type="Script" path="res://Elements/space_ship/NitroArea/nitro_area.gd" id="1_gk1my"]
+[ext_resource type="Texture2D" uid="uid://b74qgrxxulp8r" path="res://Assets/Environments/like_nitro.png" id="2_u8yub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uooa8"]
+size = Vector2(7.18563, 19.9641)
+
+[node name="NitroArea" type="Area2D"]
+scale = Vector2(1.67, 1.67)
+script = ExtResource("1_gk1my")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_u8yub")
+region_enabled = true
+region_rect = Rect2(12, 13, 7, 19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_uooa8")

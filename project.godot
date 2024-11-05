@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Space Crabs"
+config/tags=PackedStringArray("game")
 run/main_scene="res://Main/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=140
@@ -38,6 +39,10 @@ window/stretch/aspect="expand"
 movie_writer/movie_file="C:/Godot/space_crabs_movie.avi"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/virtual_joystick/plugin.cfg")
 
 [input]
 
@@ -132,12 +137,14 @@ pointing/emulate_touch_from_mouse=true
 2d_render/layer_5="Enemies"
 2d_render/layer_6="Environments"
 2d_render/layer_7="Planets"
+2d_physics/layer_1="PlayerHitbox"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Coin"
 2d_physics/layer_4="Enemies"
 2d_physics/layer_5="Rocked"
 2d_physics/layer_6="Planet"
 2d_physics/layer_7="environments"
+2d_physics/layer_8="enemy_hitbox"
 
 [physics]
 

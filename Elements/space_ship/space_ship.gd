@@ -7,9 +7,11 @@ extends RigidBody2D
 @onready var fire_rate_timer : Timer = $FireRate
 @onready var arrow = %Arrow
 @onready var space_ship_hud: Control = $SpaceShipHUD
+@onready var health_comp: HealthComponent = %HealthComponent
+@onready var damage_area_comp: DamageAreaComponent = %DamageAreaComponent
 
-@export var max_health := 0
-@export var health := 200000.0
+#@export var max_health := 0
+#@export var health := 200000.0
 
 const ACCELERATE : float = 1800 #350.0
 const DECELERATE : float = 50.0
@@ -26,20 +28,28 @@ var collided_bodies = []
 var _previous_inertia = inertia
 
 func _ready():
+	health_comp.damaged.connect(damaged)
+	health_comp.zero_health.connect(death)
+	
 	upgrage_ship(Global.SHIPS['ship_1'], Global.SHIP_ID['id_1'])
 	
+	Global.get_component(self, 'HealthComponent')
 	Global.register_new_player(self)
 	contact_monitor = true
 	max_contacts_reported = 5
+	
+	unique_name_in_owner = true
+
 
 
 func _physics_process(delta):
+	if Global.Player != self:
+		breakpoint
+	
 	direction = Input.get_vector('left', "right", "up", "down")
 	
 	if get_contact_count() == 0:
 		set_prev_inertia(linear_velocity.length() * mass)
-	
-	
 	
 	var _prev_position = global_position
 	
@@ -53,14 +63,14 @@ func _physics_process(delta):
 		sprite.rotation = linear_velocity.angle() + deg_to_rad(90)
 	timer += delta
 	
-	$HPBar.value = health
-	%HPCounter.text = str(int(health))
+	$HPBar.value = health_comp.health
+	%HPCounter.text = str(int(health_comp.health))
 	
 	var _coll = get_colliding_bodies()
 
 	for el in _coll:
-		if el.is_in_group('Enemies') and not collision_lock:
-			damage(randf_range(0, _previous_inertia * 0.0015))
+		if el.is_in_group('coll_with_player') and not collision_lock:
+			health_comp.damage(randf_range(0, _previous_inertia * 0.0070))
 			prints("Collision force", _previous_inertia)
 			collision_lock = true
 			await body_exited
@@ -137,14 +147,10 @@ func upgrage_ship(_dict: Dictionary, _id: Dictionary):
 
 
 func update_hp_bar():
-	$HPBar.value = health
-	#%HPCounter.text = str(int(health))
-
-func update_max_hp():
-	$HPBar.max_value = max_health
+	$HPBar.value = health_comp.health
 
 
-func damage(amount: float):
+func damaged():
 	var tween = get_tree().create_tween()
 	tween.tween_property($Sprite2D, 'modulate', Color.RED, 0.1)
 	tween.tween_property($Sprite2D, 'modulate', Color.WHITE, 0.1)
@@ -152,16 +158,12 @@ func damage(amount: float):
 	if Input.joy_connection_changed:
 		Input.start_joy_vibration(0, 0.5, 0.5, 1)
 	
-	health -= amount
 	update_hp_bar()
-	if health <= 0:
-		death()
-		Input.stop_joy_vibration(0)
 
 
 func death():
+	Input.stop_joy_vibration(0)
 	Global.is_space_ship_death = true
-	queue_free()
 	owner.game_over()
 
 
