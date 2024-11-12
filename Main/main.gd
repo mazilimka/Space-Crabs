@@ -4,10 +4,10 @@ extends Node2D
 @onready var comet_scene : PackedScene = load("res://Elements/BackgroundEffects/CometEffects/comet_effect.tscn")
 #TODO: не используется
 @onready var space_ship_scene : PackedScene = load("res://Elements/space_ship/space_ship.tscn")
-@onready var space_ship: RigidBody2D = %SpaceShip #TODO: ненадежная ссылка
-@onready var start: Label = %Start #TODO: не используется
+@onready var space_ship: RigidBody2D = %SpaceShip
 @onready var camera = %Camera2D
 @onready var ship_shop_area: Node2D = $ShipShopArea
+@onready var start: Label = %Start
 
 var coin
 var distance_to_coin
@@ -20,6 +20,7 @@ func _ready():
 	#TODO: мусор и эффекты с ростом класса можно вынести в отдельный класс
 	timer_for_garbage.timeout.connect(_on_timer_for_garbage_timeout)
 	%TimerForComet.timeout.connect(_on_timer_for_comet_timeout)
+	%TimerForNitro.timeout.connect(_timer_for_nitro_timeout)
 	
 	#TODO: можно выделить зацикливание сигналов в отдельные методы геймлупа
 	Events.coin_pickup.connect(enemy_outpost)
@@ -31,6 +32,7 @@ func _ready():
 	#Spawner.spawn_asteroids_area()
 	#Global.set_coin(100)
 	
+	%TimerForNitro.wait_time = randf_range(5.0, 20.0)
 	%TimerForComet.wait_time = randf_range(5.0, 10.0)
 	%TimerForComet.start()
 	enemy_outpost()
@@ -79,6 +81,13 @@ func set_wait_time():
 		timer_for_garbage.wait_time = 8.0
 
 
+func spawn_nitro():
+	var offset_by_space_ship = space_ship.linear_velocity.normalized() * 800
+	offset_by_space_ship = offset_by_space_ship.rotated(deg_to_rad(randf_range(-60, 60)))
+	Spawner.spawn_nitro(space_ship.global_position + offset_by_space_ship)
+	
+
+
 func spawn_garbages():
 	Spawner.run_garbage()
 	var offset_by_space_ship = space_ship.linear_velocity.normalized() * 800
@@ -93,3 +102,7 @@ func _on_timer_for_comet_timeout():
 func _on_timer_for_garbage_timeout():
 	set_wait_time()
 	spawn_garbages()
+
+
+func _timer_for_nitro_timeout():
+	spawn_nitro()

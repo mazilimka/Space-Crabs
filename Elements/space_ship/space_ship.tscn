@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpt6t5dqkl8dy"]
+[gd_scene load_steps=11 format=3 uid="uid://cpt6t5dqkl8dy"]
 
 [ext_resource type="Script" path="res://components/damage_controler.gd" id="1_6iar8"]
 [ext_resource type="PackedScene" uid="uid://fjjhfqi7gqw7" path="res://Elements/space_ship/Muzzle/muzzle.tscn" id="1_a41je"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://3r3lreh28mmw" path="res://Elements/space_ship/SpaceShipUD/space_ship_hud.tscn" id="5_nqlav"]
 [ext_resource type="Script" path="res://components/damage_area.gd" id="6_3vrkt"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="7_6nql0"]
-[ext_resource type="Script" path="res://components/increasing_speed_component.gd" id="8_ebu32"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6ytg"]
 radius = 7.0
@@ -94,6 +93,3 @@ update_scale = false
 unique_name_in_owner = true
 
 [node name="SpaceShipHUD" parent="." instance=ExtResource("5_nqlav")]
-
-[node name="IncreasingSpeedComponent" type="Node" parent="."]
-script = ExtResource("8_ebu32")

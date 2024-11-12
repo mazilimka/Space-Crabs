@@ -10,13 +10,10 @@ extends RigidBody2D
 @onready var health_comp: HealthComponent = %HealthComponent
 @onready var damage_area_comp: DamageAreaComponent = %DamageAreaComponent
 
-#@export var max_health := 0
-#@export var health := 200000.0
-
-const ACCELERATE : float = 1800 #350.0
 const DECELERATE : float = 50.0
 const MAX_SPEED : float = 700.0
 
+var accelerate : float = 1800
 var rate_of_fire = Global.SHIPS['ship_1']['rate_of_fire']
 var current_ship = 'ship_1'
 var current_ship_id
@@ -27,7 +24,11 @@ var collision_lock = false
 var collided_bodies = []
 var _previous_inertia = inertia
 
+signal putted_nitro
+
+
 func _ready():
+	putted_nitro.connect(set_nitro)
 	health_comp.damaged.connect(damaged)
 	health_comp.zero_health.connect(death)
 	
@@ -41,8 +42,8 @@ func _ready():
 	unique_name_in_owner = true
 
 
-
 func _physics_process(delta):
+	
 	direction = Input.get_vector('left', "right", "up", "down")
 	
 	if get_contact_count() == 0:
@@ -51,7 +52,7 @@ func _physics_process(delta):
 	var _prev_position = global_position
 	
 	var dir_delta = max(0, direction.dot(linear_velocity.normalized()))
-	apply_central_force(direction * ACCELERATE)# + (direction * ACCELERATE * 1 * dir_delta))
+	apply_central_force(direction * accelerate)# + (direction * ACCELERATE * 1 * dir_delta))
 	
 	if linear_velocity.length() > MAX_SPEED:
 		linear_velocity = linear_velocity.normalized() * MAX_SPEED
@@ -76,6 +77,12 @@ func _physics_process(delta):
 
 func set_prev_inertia(value):
 	_previous_inertia = value
+
+
+func set_nitro():
+	var incr_speed_comp = IncreasingSpeedComponent.new()
+	add_child(incr_speed_comp)
+	incr_speed_comp.on_nitro()
 
 
 func _unhandled_input(event: InputEvent) -> void:

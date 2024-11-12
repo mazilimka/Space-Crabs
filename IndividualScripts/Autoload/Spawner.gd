@@ -32,6 +32,7 @@ var OBJECT_POOL := []
 var POOL_MAX_SIZE = 100
 var POOL_POINTER = 0
 
+var nitro_area_scene := load('res://Elements/space_ship/NitroArea/nitro_area.tscn')
 var coin_scene : PackedScene = load("res://Elements/Coin/coin.tscn")
 var asteroids_group_scene := load("res://Elements/Environments/AsteroidsGroup/asteroids_group.tscn")
 
@@ -51,7 +52,6 @@ var garbage_position
 func _ready() -> void:
 	setup_pool(POOL_MAX_SIZE)
 	spawn_planets()
-
 
 
 func delete_all_object():
@@ -77,9 +77,6 @@ func spawn_enemy(_pos: Vector2, _enemy_type: int = 1):
 	return enemy_instant
 
 
-func spawn_enemy_group(_pos: Vector2):
-	pass
-
 #TODO: выделить пул в отдельный объект
 func setup_pool(_max_size):
 	POOL_MAX_SIZE = _max_size
@@ -87,11 +84,19 @@ func setup_pool(_max_size):
 		var garbage_instance = GARBAGES.pick_random().instantiate()
 		OBJECT_POOL.append(garbage_instance)
 
+
+func spawn_nitro(_pos: Vector2):
+	var nitro_instant : Area2D = nitro_area_scene.instantiate()
+	Global.get_lvl().add_child(nitro_instant, true)
+	nitro_instant.global_position = _pos
+
+
 func get_obj_from_pool():
 	var _inst = OBJECT_POOL[POOL_POINTER]
 	
 	POOL_POINTER = (POOL_POINTER + 1) % POOL_MAX_SIZE
 	return _inst
+
 
 func run_garbage():
 	garbage_instance = get_obj_from_pool()

@@ -105,6 +105,11 @@ position = Vector2(15, 0)
 scale = Vector2(1, 500)
 shape = SubResource("RectangleShape2D_bx5xs")
 
+[node name="TimerForNitro" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+autostart = true
+
 [node name="TimerForComet" type="Timer" parent="."]
 unique_name_in_owner = true
 process_callback = 0

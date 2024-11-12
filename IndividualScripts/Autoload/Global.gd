@@ -138,11 +138,6 @@ var SHIPS : Dictionary = {
 	#greet_win_run()
 
 
-#func _process(delta: float) -> void:
-	#if Player != get_node('res://Elements/space_ship/space_ship.tscn'):
-		#breakpoint
-
-
 func delete_array_ship():
 	PURCHASED_SHIP.clear()
 
