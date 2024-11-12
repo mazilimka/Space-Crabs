@@ -1,7 +1,7 @@
 @icon("res://Assets/godot-invader-small.png")
 extends CharacterBody2D
 
-@onready var progress_bar : ProgressBar = $HPBar/ProgressBar
+@onready var progress_bar : ProgressBar = %ProgressBar
 #TODO: вынести в отдельный класс спавнера проджектайлов
 @onready var enemy_rocked_scene := preload('res://Elements/Bullet/Rocked/rocked.tscn')
 @onready var timer_before_shot : Timer = $TimerBeforeShot
@@ -53,7 +53,6 @@ func launch_enemy_rocked():
 	var enemy_rocked_instant : Area2D = enemy_rocked_scene.instantiate()
 	get_parent().add_child(enemy_rocked_instant)
 	enemy_rocked_instant.modulate = Color.RED
-	
 	enemy_rocked_instant.global_position = global_position
 	enemy_rocked_instant.set_direction((Global.Player.global_position - global_position).normalized(), self, ['Enemies'])
 

@@ -43,9 +43,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	if Global.Player != self:
-		breakpoint
-	
 	direction = Input.get_vector('left', "right", "up", "down")
 	
 	if get_contact_count() == 0:
@@ -91,13 +88,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			launch_rocked(get_global_mouse_position())
 			timer = 0
 	
-	if event is InputEventScreenTouch and (timer >= rate_of_fire) and event.is_pressed():
-		print(event.pressed)
-		launch_rocked(_viewport_pos + event.position)
-		print("Запуск ракеты")
-		print_stack()
-		prints("В кадре ", Engine.get_frames_drawn())
-		timer = 0
+	if OS.has_feature('mobile'):
+		if event is InputEventScreenTouch and (timer >= rate_of_fire) and event.is_pressed():
+			print(event.pressed)
+			launch_rocked(_viewport_pos + event.position)
+			print("Запуск ракеты")
+			print_stack()
+			prints("В кадре ", Engine.get_frames_drawn())
+			timer = 0
 	
 	#if event.is_pressed() and (timer >= rate_of_fire):
 		#launch_rocked(_viewport_pos + event.position)
@@ -107,11 +105,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		#if timer != 0:
 			#launch_rocked(_viewport_pos + event.position)
 			#timer = 0
-	
-	if event is InputEventScreenDrag and (timer >= rate_of_fire):
-		if timer != 0:
-			launch_rocked(_viewport_pos + event.position)
-			timer = 0
+	if OS.has_feature('mobile'):
+		if event is InputEventScreenDrag and (timer >= rate_of_fire):
+			if timer != 0:
+				launch_rocked(_viewport_pos + event.position)
+				timer = 0
 
 	
 	if Input.is_joy_known(0):

@@ -1,11 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://73n85pceyluo"]
+[gd_scene load_steps=15 format=3 uid="uid://73n85pceyluo"]
 
 [ext_resource type="Script" path="res://Elements/Enemies/TringularEnemy/tringular_enemy.gd" id="1_w4rug"]
 [ext_resource type="Texture2D" uid="uid://dbrkdlg0ghvtc" path="res://Assets/godot-invader-small.png" id="2_5wqe5"]
+[ext_resource type="Script" path="res://components/damage_controler.gd" id="2_s15mg"]
+[ext_resource type="Script" path="res://components/damage_area.gd" id="3_3vavb"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="4_yfows"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
-radius = 9.0
-height = 18.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1an5n"]
+radius = 7.66667
+height = 15.3333
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xarv8"]
+radius = 320.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lxxsa"]
+radius = 7.33333
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4gifs"]
 atlas = ExtResource("2_5wqe5")
@@ -28,9 +37,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dcuh1"]
-radius = 320.0
 
 [sub_resource type="Animation" id="Animation_kp1gt"]
 length = 0.001
@@ -71,7 +77,6 @@ _data = {
 }
 
 [node name="TringularEnemy" type="Node2D"]
-script = ExtResource("1_w4rug")
 
 [node name="TringularEnemy" type="CharacterBody2D" parent="." groups=["Enemies"]]
 z_index = 4
@@ -80,9 +85,33 @@ scale = Vector2(3, 3)
 collision_layer = 8
 collision_mask = 10
 slide_on_ceiling = false
+script = ExtResource("1_w4rug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TringularEnemy"]
-shape = SubResource("CapsuleShape2D_1vakt")
+shape = SubResource("CapsuleShape2D_1an5n")
+
+[node name="PlayerDetection" type="Area2D" parent="TringularEnemy" groups=["Enemies"]]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TringularEnemy/PlayerDetection"]
+shape = SubResource("CircleShape2D_xarv8")
+
+[node name="DamageControlerComponent2" type="Node2D" parent="TringularEnemy"]
+script = ExtResource("2_s15mg")
+
+[node name="DamageAreaComponent" type="Area2D" parent="TringularEnemy/DamageControlerComponent2" groups=["Enemies"]]
+unique_name_in_owner = true
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("3_3vavb")
+damage_mult = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TringularEnemy/DamageControlerComponent2/DamageAreaComponent"]
+shape = SubResource("CircleShape2D_lxxsa")
+
+[node name="HealthComponent" type="Node" parent="TringularEnemy"]
+script = ExtResource("4_yfows")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TringularEnemy"]
 sprite_frames = SubResource("SpriteFrames_4wxjh")
@@ -96,6 +125,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ProgressBar" type="ProgressBar" parent="TringularEnemy/HPBar"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 0
 offset_left = -6.0
@@ -106,24 +136,12 @@ scale = Vector2(0.125, 0.125)
 theme_override_font_sizes/font_size = 11
 value = 100.0
 
-[node name="Area2D" type="Area2D" parent="TringularEnemy"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TringularEnemy/Area2D"]
-shape = SubResource("CircleShape2D_dcuh1")
-
 [node name="TimerBeforeShot" type="Timer" parent="TringularEnemy"]
 process_callback = 0
 
-[node name="PivotNode" type="Node2D" parent="."]
-
-[node name="Marker2D" type="Marker2D" parent="PivotNode"]
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PivotNode/Marker2D"]
-remote_path = NodePath("../../../TringularEnemy")
-update_rotation = false
-update_scale = false
+[node name="TimerBeforeShot2" type="Timer" parent="TringularEnemy"]
+process_callback = 0
+wait_time = 0.15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=["Enemies"]]
 callback_mode_process = 0
