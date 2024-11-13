@@ -2,4 +2,5 @@
 
 [ext_resource type="PackedScene" uid="uid://curmlty52e1nw" path="res://Elements/Enemies/DefaultEnemy/enemy.tscn" id="1_rbw4v"]
 
-[node name="TestEnemy" instance=ExtResource("1_rbw4v")]
+[node name="TestEnemy" node_paths=PackedStringArray("attack_area_node") instance=ExtResource("1_rbw4v")]
+attack_area_node = NodePath("PlayerDetection")

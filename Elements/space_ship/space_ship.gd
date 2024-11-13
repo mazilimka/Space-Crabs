@@ -24,11 +24,8 @@ var collision_lock = false
 var collided_bodies = []
 var _previous_inertia = inertia
 
-signal putted_nitro
-
 
 func _ready():
-	putted_nitro.connect(set_nitro)
 	health_comp.damaged.connect(damaged)
 	health_comp.zero_health.connect(death)
 	
@@ -77,12 +74,6 @@ func _physics_process(delta):
 
 func set_prev_inertia(value):
 	_previous_inertia = value
-
-
-func set_nitro():
-	var incr_speed_comp = IncreasingSpeedComponent.new()
-	add_child(incr_speed_comp)
-	incr_speed_comp.on_nitro()
 
 
 func _unhandled_input(event: InputEvent) -> void:

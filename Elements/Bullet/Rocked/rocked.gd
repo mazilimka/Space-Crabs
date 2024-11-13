@@ -50,15 +50,12 @@ func _on_area_entered(area):
 			return
 	
 	if area.is_in_group('Enemies'):
-		var _area = Global.get_component(area.get_parent(), 'DamageAreaComponent')
-		if _area:
-			_area.damage(randf_range(10.0, 30.0))
-		
-	#if area
-		
-	if area == Global.Player.damage_area_comp:
-		var _area = Global.get_component(area.get_parent(), 'DamageAreaComponent')
-		if _area:
-			_area.damage(randf_range(5.0, 12.0))
+		if area is DamageAreaComponent:
+			area.damage(randf_range(10.0, 30.0))
+	
+	
+	if area.is_in_group('Player'):
+		if area is DamageAreaComponent:
+			area.damage(randf_range(5.0, 12.0))
 	
 	queue_free()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://b7jbbmjiwp4uc"]
 
 [ext_resource type="Script" path="res://TestScenes/TESTMAIN/testmain.gd" id="1_yqh0q"]
-[ext_resource type="Texture2D" uid="uid://b6nyiylffofhg" path="res://Assets/Simple Shapes/Circle.png" id="2_sxaag"]
+[ext_resource type="Texture2D" uid="uid://db0o4b7vggn4k" path="res://Assets/Simple Shapes/Circle.png" id="2_sxaag"]
 [ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="2_xf04m"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_mlt3s"]
 [ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="3_t3doi"]

@@ -7,5 +7,11 @@ func _ready() -> void:
 
 func _pick_up_nitro(body):
 	if body == Global.Player:
-		body.putted_nitro.emit()
+		set_nitro(body)
 		queue_free()
+
+
+func set_nitro(_obj: Node2D):
+	var incr_speed_comp = IncreasingSpeedComponent.new()
+	_obj.add_child(incr_speed_comp)
+	incr_speed_comp.on_nitro()

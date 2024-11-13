@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://components/health_component.gd" id="5_iaygr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vakt"]
-radius = 7.66667
+radius = 7.66665
 height = 15.3333
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dcuh1"]
