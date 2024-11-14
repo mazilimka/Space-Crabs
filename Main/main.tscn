@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs2ja0bv6xsj2"]
+[gd_scene load_steps=7 format=3 uid="uid://cs2ja0bv6xsj2"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_eoanu"]
 [ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="1_s3mb7"]
 [ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="2_4g3ej"]
 [ext_resource type="PackedScene" uid="uid://d0y8je72dkmp" path="res://Elements/Environments/ShipShopArea/ship_shop_area.tscn" id="5_cystf"]
+[ext_resource type="PackedScene" uid="uid://w1llytq3xl2u" path="res://Elements/Environments/AsteroidsSpawner/asteroids_spawner.tscn" id="5_pt220"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx5xs"]
 size = Vector2(30, 40)
@@ -123,3 +124,5 @@ wait_time = 6.0
 autostart = true
 
 [node name="ShipShopArea" parent="." instance=ExtResource("5_cystf")]
+
+[node name="AsteroidsSpawner" parent="." instance=ExtResource("5_pt220")]

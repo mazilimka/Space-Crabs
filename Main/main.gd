@@ -10,18 +10,13 @@ extends Node2D
 
 var coin
 var distance_to_coin 
-var coin_spawn_radius : float = 1000.0
+var coin_spawn_radius : float = 7000.0
 var planet_radius_by_spawn : float = 8500.0
 var last_spawned_coin
 
 
-func _init() -> void:
-	Global.register_main_scene(self)
-
-
 func _ready():
 	#TODO: мусор и эффекты с ростом класса можно вынести в отдельный класс
-	Spawner.spawn_finished.connect(_on_spawn_complete)
 	timer_for_garbage.timeout.connect(_on_timer_for_garbage_timeout)
 	%TimerForComet.timeout.connect(_on_timer_for_comet_timeout)
 	%TimerForNitro.timeout.connect(_timer_for_nitro_timeout)
@@ -29,28 +24,17 @@ func _ready():
 	Events.coin_pickup.connect(enemy_outpost)
 	
 	space_ship.global_position.y = 100
-	$ShipShopArea.global_position = Vector2(randf_range(-7000, 7000), randf_range(-7000, 7000))
-	#$ShipShopArea.global_position = Vector2(100, 100)
+	ship_shop_area.global_position = Vector2(randf_range(-7000, 7000), randf_range(-7000, 7000))
 	
-	Spawner.spawning()
+	Spawner.setup_pool(100)
+	Spawner.spawn_planets()
 	enemy_outpost()
 	
-	#Global.set_coin(100)
-	#Global.register_main_scene(self)
+	print('Current scene: ', get_tree().current_scene)
 	
 	%TimerForNitro.wait_time = randf_range(5.0, 20.0)
 	%TimerForComet.wait_time = randf_range(5.0, 10.0)
 	%TimerForComet.start()
-
-
-
-#func _physics_process(delta: float) -> void:
-	##TODO: прибито гвоздями
-	#distance_to_coin = Spawner.coin_position.distance_to(Global.Player.global_position)
-
-
-func _on_spawn_complete():
-	pass
 
 
 func set_camera_remote_transform(_r_transform: RemoteTransform2D):

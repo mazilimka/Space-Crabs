@@ -5,13 +5,13 @@ extends RigidBody2D
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var rocked_scene : PackedScene = preload('res://Elements/Bullet/Rocked/rocked.tscn')
 @onready var fire_rate_timer : Timer = $FireRate
-@onready var arrow = %Arrow
 @onready var space_ship_hud: Control = $SpaceShipHUD
 @onready var health_comp: HealthComponent = %HealthComponent
 @onready var damage_area_comp: DamageAreaComponent = %DamageAreaComponent
 
 const DECELERATE : float = 50.0
 const MAX_SPEED : float = 700.0
+const NORMAL_ACCELERATE : float = 1800
 
 var accelerate : float = 1800
 var rate_of_fire = Global.SHIPS['ship_1']['rate_of_fire']

@@ -27,6 +27,6 @@ func on_nitro():
 
 
 func off_nitro():
-	space_ship.accelerate = ss_prev_accel
+	space_ship.accelerate = space_ship.NORMAL_ACCELERATE
 	print(space_ship.accelerate)
 	queue_free()

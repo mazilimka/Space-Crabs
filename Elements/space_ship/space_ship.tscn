@@ -24,8 +24,6 @@ lock_rotation = true
 script = ExtResource("1_folr6")
 
 [node name="ArrowToStore" parent="." instance=ExtResource("3_upqry")]
-position = Vector2(0, 1)
-script = ExtResource("1_6iar8")
 
 [node name="Muzzle" parent="." instance=ExtResource("1_a41je")]
 unique_name_in_owner = true

@@ -38,5 +38,4 @@ offset_right = 114.5
 offset_bottom = 38.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Loading "
 label_settings = SubResource("LabelSettings_2c23a")

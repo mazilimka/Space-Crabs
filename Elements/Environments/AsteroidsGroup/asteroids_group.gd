@@ -15,10 +15,6 @@ var distance_between_asteroids = randf_range(50, 300)
 var asteroid_position := []
 
 
-func _ready() -> void:
-	spawn_asteroids()
-
-
 func spawn_asteroids():
 	var timeout := 50
 	var new_asteroid_position

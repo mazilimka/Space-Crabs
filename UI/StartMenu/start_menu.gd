@@ -1,7 +1,6 @@
 extends PanelContainer
 
-@onready var loading_scene := load('res://LoadingScene/loading_scene.tscn')
-@onready var main_scene := load('res://Main/main.tscn')
+var loading_scene := load('res://LoadingScene/loading_scene.tscn')
 
 
 func _ready() -> void:
@@ -12,8 +11,8 @@ func _ready() -> void:
 
 
 func _single_game_pressed():
-	get_tree().root.add_child(loading_scene.instantiate())
-	get_tree().change_scene_to_packed(main_scene)
+	#get_tree().change_scene_to_file('res://Main/main.tscn')
+	get_tree().change_scene_to_packed(loading_scene)
 
 
 func _multiplayer_pressed():

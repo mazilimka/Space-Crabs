@@ -163,10 +163,6 @@ func get_lvl():
 	return get_tree().current_scene
 
 
-func register_main_scene(_main: Node2D):
-	get_tree().current_scene = _main
-
-
 func register_new_player(_player: RigidBody2D):
 	Player = _player
 	
