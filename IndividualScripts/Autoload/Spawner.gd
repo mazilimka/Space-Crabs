@@ -48,10 +48,19 @@ var additional_radius_between_planets : float = 800
 var planets_positions = []
 var garbage_position
 
+signal spawn_finished
 
-func _ready() -> void:
-	setup_pool(POOL_MAX_SIZE)
+
+#func _ready() -> void:
+	#setup_pool(POOL_MAX_SIZE)
+	#spawn_planets()
+
+
+func spawning():
+	spawn_asteroids_area()
 	spawn_planets()
+	setup_pool(POOL_MAX_SIZE)
+	spawn_finished.emit()
 
 
 func delete_all_object():

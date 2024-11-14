@@ -12,7 +12,8 @@ var coin_position := Vector2()
 var window_is_active := false
 var PURCHASED_SHIP = []
 
-var Player: Node2D
+var Player: RigidBody2D
+var Main: Node2D
 
 var SHIP_ID := {
 	'id_1' = {'name' = 'ship_1'},
@@ -149,7 +150,6 @@ func global_restart():
 	is_restart_game = true
 	is_continue_game = false
 	next_ship_id = 1
-	#Spawner.lvl_counter = 1
 	get_lvl().get_tree().reload_current_scene()
 	set_coin(0)
 
@@ -163,7 +163,11 @@ func get_lvl():
 	return get_tree().current_scene
 
 
-func register_new_player(_player: Node2D, _props = {}):
+func register_main_scene(_main: Node2D):
+	get_tree().current_scene = _main
+
+
+func register_new_player(_player: RigidBody2D):
 	Player = _player
 	
 	var lvl = get_tree().get_current_scene()

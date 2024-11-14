@@ -2,16 +2,17 @@ extends Node
 class_name IncreasingSpeedComponent
 
 var space_ship
-var timer_nitro = 5
-var timer = 0
-
-var addit_accel = 20000.0
 var ss_prev_accel
+var timer_nitro := 5.0
+var timer := 0.0
+var addit_accel := 20000.0
+
 
 func _ready() -> void:
 	space_ship = get_parent()
 	assert(space_ship, "Нет родителя")
 	on_nitro()
+
 
 func _process(delta: float) -> void:
 	timer += delta
