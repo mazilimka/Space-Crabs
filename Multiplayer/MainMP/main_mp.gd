@@ -5,7 +5,6 @@ extends Node2D
 @onready var space_ship_scene : PackedScene = load("res://Elements/space_ship/space_ship.tscn")
 @onready var space_ship: RigidBody2D = %SpaceShip
 @onready var camera = %Camera2D
-@onready var ship_shop_area: Node2D = $ShipShopArea
 @onready var start: Label = %Start
 
 var coin
@@ -24,7 +23,6 @@ func _ready():
 	Events.coin_pickup.connect(enemy_outpost)
 	
 	space_ship.global_position.y = 100
-	ship_shop_area.global_position = Vector2(randf_range(-7000, 7000), randf_range(-7000, 7000))
 	
 	Spawner.setup_pool(100)
 	Spawner.spawn_planets()
@@ -32,7 +30,7 @@ func _ready():
 	
 	print('Current scene: ', get_tree().current_scene)
 	
-	%TimerForNitro.wait_time = 1 #randf_range(5.0, 20.0)
+	%TimerForNitro.wait_time = randf_range(5.0, 20.0)
 	%TimerForComet.wait_time = randf_range(5.0, 10.0)
 	%TimerForComet.start()
 

@@ -8,6 +8,7 @@ var is_restart_game := false
 var is_continue_game := false
 var is_space_ship_death := false
 var score : int = 0
+var nitro_counter := 0
 var coin_position := Vector2()
 var window_is_active := false
 var PURCHASED_SHIP = []

@@ -1,34 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs2ja0bv6xsj2"]
+[gd_scene load_steps=6 format=3 uid="uid://7x1nvf7dal4u"]
 
-[ext_resource type="Script" path="res://Main/main.gd" id="1_eoanu"]
-[ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="1_s3mb7"]
-[ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="2_4g3ej"]
-[ext_resource type="PackedScene" uid="uid://d0y8je72dkmp" path="res://Elements/Environments/ShipShopArea/ship_shop_area.tscn" id="5_cystf"]
-[ext_resource type="PackedScene" uid="uid://w1llytq3xl2u" path="res://Elements/Environments/AsteroidsSpawner/asteroids_spawner.tscn" id="5_pt220"]
+[ext_resource type="Texture2D" uid="uid://6333806ov63n" path="res://Assets/Space_Stars2.png" id="1_x1hky"]
+[ext_resource type="Script" path="res://Multiplayer/MainMP/main_mp.gd" id="1_ye7lt"]
+[ext_resource type="PackedScene" uid="uid://cpt6t5dqkl8dy" path="res://Elements/space_ship/space_ship.tscn" id="2_bhpf1"]
+[ext_resource type="PackedScene" uid="uid://w1llytq3xl2u" path="res://Elements/Environments/AsteroidsSpawner/asteroids_spawner.tscn" id="3_hiytp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx5xs"]
 size = Vector2(30, 40)
 
-[node name="Main" type="Node2D"]
-script = ExtResource("1_eoanu")
+[node name="MainMP" type="Node2D"]
+script = ExtResource("1_ye7lt")
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -10000.0
-offset_top = -10000.0
-offset_right = 10000.0
-offset_bottom = 10000.0
+offset_left = -5000.0
+offset_top = -5000.0
+offset_right = 5000.0
+offset_bottom = 5000.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("1_s3mb7")
+texture = ExtResource("1_x1hky")
 stretch_mode = 1
-metadata/_edit_lock_ = true
 
-[node name="SpaceShip" parent="." instance=ExtResource("2_4g3ej")]
+[node name="SpaceShip" parent="." instance=ExtResource("2_bhpf1")]
 unique_name_in_owner = true
 mass = 2.0
 angular_damp = 0.1
@@ -58,10 +56,10 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 ignore_rotation = false
 process_callback = 0
-limit_left = -10000
-limit_top = -10000
-limit_right = 10000
-limit_bottom = 10000
+limit_left = -5000
+limit_top = -5000
+limit_right = 5000
+limit_bottom = 5000
 position_smoothing_speed = 7.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
@@ -69,7 +67,7 @@ editor_draw_drag_margin = true
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]
-position = Vector2(9995, 0)
+position = Vector2(4995, 0)
 collision_layer = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
@@ -78,7 +76,7 @@ scale = Vector2(1, 500)
 shape = SubResource("RectangleShape2D_bx5xs")
 
 [node name="Wall2" type="StaticBody2D" parent="Walls"]
-position = Vector2(-10024, 0)
+position = Vector2(-5005, 0)
 collision_layer = 65
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
@@ -87,7 +85,7 @@ scale = Vector2(1, 500)
 shape = SubResource("RectangleShape2D_bx5xs")
 
 [node name="Wall3" type="StaticBody2D" parent="Walls"]
-position = Vector2(0, 10000)
+position = Vector2(0, 4995)
 rotation = 1.5708
 collision_layer = 65
 
@@ -97,7 +95,7 @@ scale = Vector2(1, 500)
 shape = SubResource("RectangleShape2D_bx5xs")
 
 [node name="Wall4" type="StaticBody2D" parent="Walls"]
-position = Vector2(0, -10030)
+position = Vector2(0, -5005)
 rotation = 1.5708
 collision_layer = 65
 
@@ -108,6 +106,7 @@ shape = SubResource("RectangleShape2D_bx5xs")
 
 [node name="TimerForNitro" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 5.0
 autostart = true
 
 [node name="TimerForComet" type="Timer" parent="."]
@@ -122,6 +121,4 @@ process_callback = 0
 wait_time = 6.0
 autostart = true
 
-[node name="ShipShopArea" parent="." instance=ExtResource("5_cystf")]
-
-[node name="AsteroidsSpawner" parent="." instance=ExtResource("5_pt220")]
+[node name="AsteroidsSpawner" parent="." instance=ExtResource("3_hiytp")]

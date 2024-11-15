@@ -13,5 +13,6 @@ func _pick_up_nitro(body):
 
 func set_nitro(_obj: Node2D):
 	var incr_speed_comp = IncreasingSpeedComponent.new()
-	_obj.add_child(incr_speed_comp)
+	_obj.add_child(incr_speed_comp, true)
 	incr_speed_comp.on_nitro()
+	Global.nitro_counter += 1

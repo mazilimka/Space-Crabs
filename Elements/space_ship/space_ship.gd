@@ -26,6 +26,7 @@ var _previous_inertia = inertia
 
 
 func _ready():
+	Events.game_mode_changed.connect(update_game_mode)
 	health_comp.damaged.connect(damaged)
 	health_comp.zero_health.connect(death)
 	
@@ -119,6 +120,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			print_stack()
 			prints("В кадре ", Engine.get_frames_drawn())
 			timer = 0
+
+
+func update_game_mode(mode: Events.GameMode):
+	if mode == Events.GameMode.SINGLE:
+		$ArrowToStore.set_process(true)
+		%Arrow.set_process(true)
+	else:
+		$ArrowToStore.set_process(false)
+		%Arrow.set_process(false)
 
 
 func launch_rocked(_to: Vector2):

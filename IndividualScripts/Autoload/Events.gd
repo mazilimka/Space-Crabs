@@ -1,5 +1,9 @@
 extends Node
 
+
+enum GameMode { SINGLE, MULTIPLAER }
+
+signal game_mode_changed(mode: GameMode)
 #TODO: лучше объяснить разницу шины событий и отдельного ивента конкретного объекта
 signal score_coin_update(coin: int)
 signal coin_collected
