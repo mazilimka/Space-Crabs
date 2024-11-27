@@ -4,7 +4,6 @@ var next_ship_id := 1
 var purchased_ships_counter: = 1
 #TODO: намекает на создание машины состояний
 #TODO: области ответственности перемешаны
-var is_restart_game := false
 var is_continue_game := false
 var is_space_ship_death := false
 var score : int = 0
@@ -136,28 +135,20 @@ var SHIPS : Dictionary = {
 }
 
 
-#func _ready() -> void:
-	#greet_win_run()
-
-
-func delete_array_ship():
+func purchased_ships_array():
 	PURCHASED_SHIP.clear()
 
 
 func global_restart():
 	is_space_ship_death = false
-	delete_array_ship()
+	purchased_ships_array()
 	PURCHASED_SHIP.append(Global.SHIP_ID['id_1']['name'])
-	is_restart_game = true
 	is_continue_game = false
 	next_ship_id = 1
+	purchased_ships_counter = 1
+	Spawner.lvl_counter = 1
 	get_lvl().get_tree().reload_current_scene()
 	set_coin(0)
-
-
-func greet_win_run():
-	get_tree().change_scene_to_file("res://Hi/hi.tscn")
-	MainHud.change_stage('GreetWindow')
 
 
 func get_lvl():

@@ -10,7 +10,7 @@ extends Node2D
 
 var coin
 var distance_to_coin 
-var coin_spawn_radius : float = 7000.0
+var coin_spawn_radius : float = 6500.0
 var planet_radius_by_spawn : float = 8500.0
 var last_spawned_coin
 
@@ -29,10 +29,11 @@ func _ready():
 	Spawner.setup_pool(100)
 	Spawner.spawn_planets()
 	enemy_outpost()
+	#Global.set_coin(100)
 	
 	print('Current scene: ', get_tree().current_scene)
 	
-	%TimerForNitro.wait_time = 1 #randf_range(5.0, 20.0)
+	%TimerForNitro.wait_time = randf_range(5.0, 20.0)
 	%TimerForComet.wait_time = randf_range(5.0, 10.0)
 	%TimerForComet.start()
 

@@ -24,17 +24,13 @@ var enemy_scenes : Dictionary = {
 	4: load("res://Elements/Enemies/TringularEnemy/tringular_enemy.tscn")
 }
 
-#var asteroid_areas_count = randi_range(10, 20)
-#var occupied_asteroid_areas_pos := []
 var area_place := 9000.0
-#var asteroids_ready_flag := false
 var OBJECT_POOL := []
 var POOL_MAX_SIZE = 100
 var POOL_POINTER = 0
 
 var nitro_area_scene := load('res://Elements/space_ship/NitroArea/nitro_area.tscn')
 var coin_scene : PackedScene = load("res://Elements/Coin/coin.tscn")
-#var asteroids_group_scene := load("res://Elements/Environments/AsteroidsGroup/asteroids_group.tscn")
 
 var lvl_counter: int = 1
 var garbage_instance

@@ -32,10 +32,15 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="MarginContainer/Control"]
 unique_name_in_owner = true
-layout_mode = 2
-offset_right = 612.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -306.0
+offset_right = 306.0
 offset_bottom = 96.0
-pivot_offset = Vector2(296, 50)
+grow_horizontal = 2
+pivot_offset = Vector2(304.345, 50)
 size_flags_vertical = 0
 text = "Space Crabs!"
 label_settings = SubResource("LabelSettings_bsv32")
@@ -58,6 +63,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
+disabled = true
 text = "Multiplayer"
 
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]

@@ -95,6 +95,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			print_stack()
 			prints("В кадре ", Engine.get_frames_drawn())
 			timer = 0
+		
+		if event is InputEventScreenDrag and (timer >= rate_of_fire):
+			if timer != 0:
+				launch_rocked(_viewport_pos + event.position)
+				timer = 0
 	
 	#if event.is_pressed() and (timer >= rate_of_fire):
 		#launch_rocked(_viewport_pos + event.position)
@@ -104,11 +109,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		#if timer != 0:
 			#launch_rocked(_viewport_pos + event.position)
 			#timer = 0
-	if OS.has_feature('mobile'):
-		if event is InputEventScreenDrag and (timer >= rate_of_fire):
-			if timer != 0:
-				launch_rocked(_viewport_pos + event.position)
-				timer = 0
 
 	
 	if Input.is_joy_known(0):
