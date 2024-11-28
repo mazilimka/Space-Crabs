@@ -14,7 +14,7 @@ config/name="Space Crabs"
 config/tags=PackedStringArray("game")
 run/main_scene="res://UI/StartMenu/start_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-run/max_fps=140
+run/max_fps=60
 boot_splash/bg_color=Color(0.259294, 0.259294, 0.259294, 1)
 boot_splash/image="res://Assets/Spaceships/space_ship.png"
 boot_splash/use_filter=false
@@ -30,7 +30,6 @@ Spawner="*res://IndividualScripts/Autoload/Spawner.gd"
 
 [display]
 
-window/size/always_on_top=true
 window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"

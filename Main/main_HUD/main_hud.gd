@@ -13,10 +13,10 @@ var current_stage #TODO: не используется
 var current_menu = null
 
 func _ready() -> void:
-	if OS.get_name() == 'Android' or OS.get_name() == 'iOS':
-		%VirtualJoystick.show()
-	else:
-		%VirtualJoystick.hide()
+	#if OS.has_feature('mobile'):
+		#%VirtualJoystick.show()
+	#else:
+		#%VirtualJoystick.hide()
 	
 	change_stage('GameplayHud')
 	Events.score_coin_update.connect(update_coin)
@@ -32,6 +32,11 @@ func update_coin(coin: int):
 	score.text = str(coin)
 
 
+func show_joystick():
+	%VirtualJoystick.show()
+	return
+
+
 func _on_game_pause_toggled() -> void:
 	get_tree().paused = true
 	death_window.open()
@@ -43,6 +48,7 @@ func launch_ship_purchase_notif():
 	tween.tween_property(ship_purchase_not, 'modulate', Color('#fe934500'), 8)
 	await tween.finished
 	ship_purchase_not.hide()
+	ship_purchase_not.modulate = '#fe9345'
 
 #TODO: переделать
 func change_stage(_stage: String):

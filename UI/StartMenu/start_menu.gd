@@ -24,6 +24,13 @@ func _settings_pressed():
 	pass
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch and not Global.is_mobile:
+		Global.is_mobile = true
+		MainHud.show_joystick()
+
+
+
 func title_tween():
 	var tween_rot := get_tree().create_tween().set_loops(-1).set_ease(Tween.EASE_IN_OUT)
 	tween_rot.tween_property(%Title, 'rotation', deg_to_rad(-10), 3)

@@ -11,6 +11,7 @@ var nitro_counter := 0
 var coin_position := Vector2()
 var window_is_active := false
 var PURCHASED_SHIP = []
+var is_mobile := false
 
 var Player: RigidBody2D
 var Main: Node2D

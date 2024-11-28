@@ -68,6 +68,7 @@ offset_left = -34.0
 offset_top = -43.0
 offset_right = 38.67
 offset_bottom = -16.0
+mouse_filter = 2
 show_percentage = false
 
 [node name="HPCounter" type="Label" parent="HPBar"]

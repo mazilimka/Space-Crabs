@@ -82,12 +82,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	var camera_pos = get_viewport().get_camera_2d().get_target_position()
 	var _viewport_pos = camera_pos - (_rect.size / 2)
 	
-	if OS.has_feature("windows") or OS.has_feature('web'):
+	if OS.has_feature("windows") or OS.has_feature('web') and not Global.is_mobile:
 		if Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
 			launch_rocked(get_global_mouse_position())
 			timer = 0
 	
-	if OS.has_feature('mobile'):
+	if Global.is_mobile:
 		if event is InputEventScreenTouch and (timer >= rate_of_fire) and event.is_pressed():
 			print(event.pressed)
 			launch_rocked(_viewport_pos + event.position)
@@ -100,16 +100,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			if timer != 0:
 				launch_rocked(_viewport_pos + event.position)
 				timer = 0
-	
-	#if event.is_pressed() and (timer >= rate_of_fire):
-		#launch_rocked(_viewport_pos + event.position)
-		#timer = 0
-	
-	#if event is InputEventScreenTouch and (timer >= rate_of_fire):
-		#if timer != 0:
-			#launch_rocked(_viewport_pos + event.position)
-			#timer = 0
-
 	
 	if Input.is_joy_known(0):
 		if event is InputEventJoypadButton and Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
