@@ -11,7 +11,6 @@ func _ready() -> void:
 
 
 func _single_game_pressed():
-	#get_tree().change_scene_to_file('res://Main/main.tscn')
 	Events.game_mode_changed.emit(Events.GameMode.SINGLE)
 	get_tree().change_scene_to_packed(loading_scene)
 
@@ -19,7 +18,6 @@ func _single_game_pressed():
 func _multiplayer_pressed():
 	Events.game_mode_changed.emit(Events.GameMode.MULTIPLAER)
 	get_tree().change_scene_to_file('res://Multiplayer/MainMP/main_mp.tscn')
-	#get_tree().change_scene_to_file('res://Multiplayer/ChangeHost/change_host.tscn')
 
 
 func _settings_pressed():

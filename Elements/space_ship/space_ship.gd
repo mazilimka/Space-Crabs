@@ -82,7 +82,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var camera_pos = get_viewport().get_camera_2d().get_target_position()
 	var _viewport_pos = camera_pos - (_rect.size / 2)
 	
-	if OS.has_feature("windows"):
+	if OS.has_feature("windows") or OS.has_feature('web'):
 		if Input.is_action_just_pressed("shot") and (timer >= rate_of_fire):
 			launch_rocked(get_global_mouse_position())
 			timer = 0
@@ -138,7 +138,7 @@ func launch_rocked(_to: Vector2):
 	var rocked_instantiate := rocked_scene.instantiate()
 	add_child(rocked_instantiate)
 	rocked_instantiate.global_position = marker_for_muzzle.global_position
-	rocked_instantiate.set_direction((_to - marker_for_muzzle.global_position).normalized(), self)
+	rocked_instantiate.set_direction((_to - marker_for_muzzle.global_position).normalized(), self, ['Player'])
 	if Input.is_joy_known(0):
 		rocked_instantiate.set_direction(_to.normalized(), self)
 		return
