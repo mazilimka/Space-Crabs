@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	scene_loading_status = ResourceLoader.load_threaded_get_status(main_scene_path, progress)
 	%LoadingStatus.text = 'Loading: ' + str(floor(progress[0] * 100)) + '%'
 	if scene_loading_status == ResourceLoader.THREAD_LOAD_LOADED:
-		var main_scene = ResourceLoader.load_threaded_get(main_scene_path)
+		var main_scene := ResourceLoader.load_threaded_get(main_scene_path)
 		get_tree().change_scene_to_packed(main_scene)
 
 

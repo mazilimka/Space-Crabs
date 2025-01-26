@@ -15,10 +15,10 @@ config/tags=PackedStringArray("game")
 run/main_scene="res://UI/StartMenu/start_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
-boot_splash/bg_color=Color(0.259294, 0.259294, 0.259294, 1)
+boot_splash/bg_color=Color(0.165523, 0.00100708, 0.257813, 1)
 boot_splash/image="res://Assets/Spaceships/space_ship.png"
 boot_splash/use_filter=false
-config/icon="res://Assets/Planets/planet-saturn-pixel-art-png.png"
+config/icon="res://icon.png"
 
 [autoload]
 
@@ -37,8 +37,6 @@ window/stretch/aspect="expand"
 [editor]
 
 movie_writer/movie_file="C:/Godot/space_crabs_movie.avi"
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
 
 [editor_plugins]
 
@@ -153,3 +151,5 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+textures/decals/filter=0
+textures/light_projectors/filter=0

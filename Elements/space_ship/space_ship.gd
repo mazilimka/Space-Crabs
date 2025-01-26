@@ -49,7 +49,6 @@ func _physics_process(delta):
 	
 	var _prev_position = global_position
 	
-	var dir_delta = max(0, direction.dot(linear_velocity.normalized()))
 	apply_central_force(direction * accelerate)# + (direction * ACCELERATE * 1 * dir_delta))
 	
 	if linear_velocity.length() > MAX_SPEED:

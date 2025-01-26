@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbv2rqo8p3jjw"]
 
 [ext_resource type="PackedScene" uid="uid://ca5knjhiuaeiw" path="res://Elements/Planets/BasicGreenPlanet/basic_green_planet.tscn" id="1_uyrlx"]
-[ext_resource type="Texture2D" uid="uid://csjuwjai0frvx" path="res://Assets/Planets/planet-saturn-pixel-art-png.png" id="2_kos34"]
+[ext_resource type="Texture2D" uid="uid://csjuwjai0frvx" path="res://Assets/Planets/planet-saturn.png" id="2_kos34"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vabrq"]
 radius = 14.8947
